@@ -48,7 +48,7 @@ public class MovieAwardController {
             movieAwardExist.setMovies(movieAward.getMovies());
             movieAwardExist.setAwards(movieAward.getAwards());
             movieAwardExist.setNomineeWinner(movieAward.getNomineeWinner());
-
+            movieAwardService.saveMovieAward(movieAwardExist);
             return new ResponseEntity<MovieAward>(movieAwardExist, HttpStatus.OK);
 
         } catch (Exception e) {

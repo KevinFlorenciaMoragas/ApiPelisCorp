@@ -45,7 +45,7 @@ public class GenreController {
         try {
             Genre genreExist = genreService.findGenreById(id);
             genreExist.setGenre(genre.getGenre());
-            genreExist.setMovieGenres(genre.getMovieGenres());
+            genreService.saveGenre(genreExist);
             return new ResponseEntity<Genre>(genreExist, HttpStatus.OK);
 
         } catch (Exception e) {

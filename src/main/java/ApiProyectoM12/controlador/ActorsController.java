@@ -49,6 +49,7 @@ public class ActorsController {
             actorsExist.setLastName(actors.getLastName());
             actorsExist.setActorAwards(actors.getActorAwards());
             actorsExist.setMovieActors(actors.getMovieActors());
+            actorsService.saveActors(actorsExist);
             return new ResponseEntity<Actors>(actorsExist, HttpStatus.OK);
 
         } catch (Exception e) {

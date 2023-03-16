@@ -47,6 +47,7 @@ public class MovieDirectorController {
             MovieDirector movieDirectorExist = movieDirectorService.findMovieDirectorById(id);
             movieDirectorExist.setDirector(movieDirectorExist.getDirector());
             movieDirectorExist.setMovies(movieDirector.getMovies());
+            movieDirectorService.saveMovieDirector(movieDirectorExist);
             return new ResponseEntity<MovieDirector>(movieDirectorExist, HttpStatus.OK);
 
         } catch (Exception e) {

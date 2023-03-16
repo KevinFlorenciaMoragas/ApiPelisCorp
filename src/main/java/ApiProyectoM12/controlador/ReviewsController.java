@@ -49,6 +49,7 @@ public class ReviewsController {
             reviewsExist.setUserReviews(reviews.getUserReviews());
             reviewsExist.setMovieReviews(reviews.getMovieReviews());
             reviewsExist.setAverageRating(reviews.getAverageRating());
+            reviewsService.saveReview(reviewsExist);
             return new ResponseEntity<Reviews>(reviewsExist, HttpStatus.OK);
 
         } catch (Exception e) {

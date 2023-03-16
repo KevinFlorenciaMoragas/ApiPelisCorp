@@ -50,6 +50,7 @@ public class UserRolController {
         try {
             UserRol userRolExist = userRolService.findUserRolById(id);
             userRolExist.setRol(userRol.getRol());
+            userRolService.saveUserRol(userRolExist);
             return new ResponseEntity<UserRol>(userRolExist,HttpStatus.OK);
 
         } catch(Exception e){

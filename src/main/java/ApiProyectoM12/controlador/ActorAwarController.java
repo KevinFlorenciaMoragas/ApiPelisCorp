@@ -48,6 +48,7 @@ public class ActorAwarController {
             actorAwardExist.setNomineeWinner(actorAward.getNomineeWinner());
             actorAwardExist.setActors(actorAward.getActors());
             actorAwardExist.setAwards(actorAward.getAwards());
+            actorAwardService.saveActorAward(actorAwardExist);
             return new ResponseEntity<ActorAward>(actorAwardExist, HttpStatus.OK);
 
         } catch (Exception e) {

@@ -46,6 +46,7 @@ public class MovieActorController {
             MovieActor movieActorExist = movieActorService.findMovieActorById(id);
             movieActorExist.setActors(movieActor.getActors());
             movieActorExist.setMovies(movieActor.getMovies());
+            movieActorService.saveMovieActor(movieActorExist);
             return new ResponseEntity<MovieActor>(movieActorExist, HttpStatus.OK);
 
         } catch (Exception e) {

@@ -46,6 +46,7 @@ public class MovieGenreController {
             MovieGenre movieGenreExist = movieGenreService.findMovieGenreById(id);
             movieGenreExist.setGenre(movieGenre.getGenre());
             movieGenreExist.setMovies(movieGenre.getMovies());
+            movieGenreService.saveMovieGenre(movieGenreExist);
             return new ResponseEntity<MovieGenre>(movieGenreExist,HttpStatus.OK);
 
         } catch(Exception e){

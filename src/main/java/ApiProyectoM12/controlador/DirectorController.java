@@ -47,6 +47,7 @@ public class DirectorController {
             directorExist.setName(director.getName());
             directorExist.setLastName(director.getLastName());
             directorExist.setMovieDirectors(director.getMovieDirectors());
+            directorService.saveDirector(directorExist);
             return new ResponseEntity<Director>(directorExist, HttpStatus.OK);
 
         } catch (Exception e) {

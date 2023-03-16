@@ -46,6 +46,7 @@ public class FavoriteController {
           Favorite favoriteExist = favoriteService.findFavoriteById(id);
             favoriteExist.setUser(favorite.getUser());
             favoriteExist.setMovies(favorite.getMovies());
+            favoriteService.saveFavorite(favoriteExist);
             return new ResponseEntity<Favorite>(favoriteExist, HttpStatus.OK);
 
         } catch (Exception e) {

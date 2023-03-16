@@ -52,6 +52,7 @@ public class UserController {
             userExist.setUserReviews(user.getUserReviews());
             userExist.setFavorites(user.getFavorites());
             // userExist.setId_rol(user.getId_rol());
+            userService.saveUser(userExist);
             return new ResponseEntity<User>(userExist, HttpStatus.OK);
 
         } catch (Exception e) {

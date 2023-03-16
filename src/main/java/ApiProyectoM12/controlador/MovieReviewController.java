@@ -48,6 +48,7 @@ public class MovieReviewController {
             MovieReview movieReviewExist = movieReviewService.findMovieReviewById(id);
             movieReviewExist.setReviews(movieReview.getReviews());
             movieReviewExist.setMovies(movieReview.getMovies());
+            movieReviewService.saveMovieReview(movieReviewExist);
             return new ResponseEntity<MovieReview>(movieReviewExist, HttpStatus.OK);
 
         } catch (Exception e) {

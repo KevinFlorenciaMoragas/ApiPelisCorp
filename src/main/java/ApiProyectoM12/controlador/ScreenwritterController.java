@@ -48,6 +48,7 @@ public class ScreenwritterController {
             screenwritterExist.setName(screenwritter.getName());
             screenwritterExist.setLastName(screenwritter.getLastName());
             screenwritterExist.setMovieScreenwritters(screenwritter.getMovieScreenwritters());
+            screenwritterService.saveSreenwritter(screenwritterExist);
             return new ResponseEntity<Screenwritter>(screenwritterExist, HttpStatus.OK);
 
         } catch (Exception e) {

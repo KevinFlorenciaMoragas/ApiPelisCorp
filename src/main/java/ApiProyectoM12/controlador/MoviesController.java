@@ -56,6 +56,7 @@ public class MoviesController {
             movieExists.setMovieAwards(movies.getMovieAwards());
             movieExists.setMovieScreenwritters(movies.getMovieScreenwritters());
             movieExists.setFavorites(movies.getFavorites());
+            moviesService.saveMovie(movieExists);
             return new ResponseEntity<Movies>(movieExists, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Movies>(HttpStatus.INTERNAL_SERVER_ERROR);

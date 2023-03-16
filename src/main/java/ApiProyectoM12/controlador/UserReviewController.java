@@ -49,6 +49,7 @@ public class UserReviewController {
             userReviewExist.setUser(userReview.getUser());
             userReviewExist.setRating(userReview.getRating());
             userReviewExist.setDate(userReview.getDate());
+            userReviewService.saveUserReview(userReviewExist);
             return new ResponseEntity<UserReview>(userReviewExist, HttpStatus.OK);
 
         } catch (Exception e) {

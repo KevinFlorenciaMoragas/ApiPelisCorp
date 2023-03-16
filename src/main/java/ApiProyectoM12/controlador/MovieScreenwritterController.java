@@ -47,7 +47,7 @@ public class MovieScreenwritterController
             MovieScreenwritter movieScreenwritterExist = movieScreenwritterService.findMovieScreenwritterById(id);
             movieScreenwritterExist.setScreenwritter(movieScreenwritterExist.getScreenwritter());
             movieScreenwritterExist.setMovies(movieScreenwritterExist.getMovies());
-
+            movieScreenwritterService.saveMovieScreenwritter(movieScreenwritterExist);
             return new ResponseEntity<MovieScreenwritter>(movieScreenwritterExist, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<MovieScreenwritter>(HttpStatus.INTERNAL_SERVER_ERROR);
