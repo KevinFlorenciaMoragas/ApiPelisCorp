@@ -14,6 +14,11 @@ public class MoviesService {
     public List<Movies> listMovies(){return moviesRepository.findAll();}
     public void saveMovie(Movies movies){moviesRepository.save(movies);}
     public Movies findMovieById(Integer id){return moviesRepository.findById(id).get();}
+
+    public Movies findMovieByName(String movieName) {
+        return moviesRepository.findByName(movieName)
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+    }
     public void deleteMovie(Integer id){moviesRepository.deleteById(id);}
 
 
