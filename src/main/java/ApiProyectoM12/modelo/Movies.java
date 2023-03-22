@@ -26,6 +26,8 @@ public class Movies {
     private Long duration;
     @Column(name = "income")
     private Long income;
+    @Column(name = "score")
+    private Double score;
     @OneToMany(mappedBy = "movies")
     Set<Favorite>favorites;
     @OneToMany(mappedBy = "movies")

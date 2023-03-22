@@ -1,5 +1,6 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.repositorio.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,17 +18,15 @@ import java.util.List;
 public class SpringSessionController {
     private final UserRepository userRepository;
     @PostMapping("/login")
-    @ResponseBody
-    public String login(@RequestParam String username,@RequestParam String password, HttpServletRequest request, Model model) {
+    public String login(@RequestBody User user, HttpServletRequest request, Model model) {
         System.out.println("Entramos en login");
         try {
-            System.out.println("password " + password);
-            System.out.println("username " + username);
-            if (userRepository.findByUsernameAndPassword(username, password) != null) {
+            if (userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword()) != null) {
                 System.out.println("Usuario correcto");
                 HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                System.out.println(session.getAttribute(username));
+                session.setAttribute("username", user.getUsername());
+                session.setAttribute("rol", user.getUserRol());
+                System.out.println(session.getAttribute(user.getUsername()));
                 return "redirect:/";
             } else {
                 model.addAttribute("error", "Usuario o contraseña incorrectos");
