@@ -2,10 +2,12 @@ package ApiProyectoM12.servicio;
 
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.repositorio.MoviesRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MoviesService {
@@ -15,11 +17,10 @@ public class MoviesService {
     public void saveMovie(Movies movies){moviesRepository.save(movies);}
     public Movies findMovieById(Integer id){return moviesRepository.findById(id).get();}
 
-    public Movies findMovieByName(String movieName) {
-        return moviesRepository.findByName(movieName)
-                .orElseThrow(() -> new RuntimeException("Movie not found"));
-    }
+    public List<Movies> findMovieByName(String movieName){return moviesRepository.findByMovieName(movieName);}
+
     public void deleteMovie(Integer id){moviesRepository.deleteById(id);}
+
 
 
 }

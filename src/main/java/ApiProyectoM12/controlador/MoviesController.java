@@ -15,19 +15,26 @@ import java.util.List;
 public class MoviesController {
     private final MoviesService moviesService;
 
-    @GetMapping("/movies")
+    @GetMapping("/allMovies")
     public List<Movies> listFavorite() {
         return moviesService.listMovies();
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<Movies> getMovieById(@PathVariable Integer id) {
+    public ResponseEntity<Movies> getMovieById(@RequestParam Integer id) {
         try {
+
             Movies movie = moviesService.findMovieById(id);
             return ResponseEntity.ok(movie);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/movies")
+    public List<Movies> findMovieByName(@RequestParam("movieName") String movieName) {
+        System.out.println(movieName);
+        return moviesService.findMovieByName(movieName);
     }
 
     @PostMapping("/movies")
