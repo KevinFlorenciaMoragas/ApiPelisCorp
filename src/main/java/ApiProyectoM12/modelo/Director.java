@@ -16,9 +16,9 @@ public class Director {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
-    @Column(name = "lastName")
+    @Column(name = "lastName", length = 50)
     private String lastName;
     @OneToMany(mappedBy = "director")
     Set<MovieDirector> movieDirectors;

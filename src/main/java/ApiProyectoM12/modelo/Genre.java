@@ -15,7 +15,7 @@ import java.util.Set;
 public class Genre {
     @Id @GeneratedValue
     private Integer id;
-    @Column(name="genre")
+    @Column(name="genre", length = 100)
     private String genre;
     @OneToMany(mappedBy = "genre")
     Set<MovieGenre> movieGenres;
