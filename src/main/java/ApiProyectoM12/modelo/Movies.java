@@ -16,11 +16,12 @@ import java.util.Set;
 public class Movies {
     @Id @GeneratedValue
     private Integer id;
-    @Column(name="movieName", length = 10000)
+
+    @Column(name="movieName",length = 100)
     private String movieName;
     @Column(name="release_date")
     private Date releaseDate;
-    @Column(name="plot")
+    @Column(name="plot", length = 8000)
     private String plot;
     @Column(name = "duration")
     private Long duration;

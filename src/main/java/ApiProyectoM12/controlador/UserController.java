@@ -45,6 +45,8 @@ public class UserController {
     public ResponseEntity<?> editUser(@RequestBody User user, @PathVariable Integer id) {
         try {
             User userExist = userService.findUserById(id);
+            userExist.setName(user.getName());
+            userExist.setLast_name(user.getLast_name());
             userExist.setUsername(user.getUsername());
             userExist.setPassword(user.getPassword());
             userExist.setEmail(user.getEmail());

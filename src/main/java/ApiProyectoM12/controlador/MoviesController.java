@@ -16,14 +16,15 @@ import java.util.List;
 public class MoviesController {
     private final MoviesService moviesService;
 
-    @GetMapping("/movies")
+    @GetMapping("/allMovies")
     public List<Movies> listFavorite() {
         return moviesService.listMovies();
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<Movies> getMovieById(@PathVariable Integer id) {
+    public ResponseEntity<Movies> getMovieById(@RequestParam Integer id) {
         try {
+
             Movies movie = moviesService.findMovieById(id);
             return ResponseEntity.ok(movie);
         } catch (Exception e) {
@@ -35,6 +36,7 @@ public class MoviesController {
             return moviesService.findTopByOrderByScoreDesc();
             //return ResponseEntity.ok(movie);
     }
+
 
     @GetMapping("/movies/topAsc")
     public List<Movies> getTopMovieAsc() {
@@ -53,6 +55,7 @@ public class MoviesController {
         return movie;
         //return ResponseEntity.ok(movie);
     }
+
     @PostMapping("/movies")
     public ResponseEntity<Movies> newMovies(@RequestBody Movies movies) {
         try {
