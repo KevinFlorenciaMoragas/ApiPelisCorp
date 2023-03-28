@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -30,11 +31,29 @@ public class MoviesController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/movies/topDesc")
+    public List<Movies> getTopMovieDesc() {
+            return moviesService.findTopByOrderByScoreDesc();
+            //return ResponseEntity.ok(movie);
+    }
 
-    @GetMapping("/movies")
-    public List<Movies> findMovieByName(@RequestParam("movieName") String movieName) {
-        System.out.println(movieName);
-        return moviesService.findMovieByName(movieName);
+
+    @GetMapping("/movies/topAsc")
+    public List<Movies> getTopMovieAsc() {
+        return moviesService.findTopByOrderByScoreAsc();
+        //return ResponseEntity.ok(movie);
+    }
+   /* @GetMapping("/movies/{releaseDate}")
+    public List<Movies> getMovieByReleaseDate(@PathVariable Date releaseDate) {
+        return moviesService.findMoviesByReleaseDate(releaseDate);
+        //return ResponseEntity.ok(movie);
+    }*/
+    @GetMapping("/movies?name={movieName}")
+    public Movies getMovieByMovieName(@RequestBody Movies movie) {
+        System.out.println(movie.getMovieName());
+        movie = moviesService.findMoviesByMovieName(movie.getMovieName());
+        return movie;
+        //return ResponseEntity.ok(movie);
     }
 
     @PostMapping("/movies")

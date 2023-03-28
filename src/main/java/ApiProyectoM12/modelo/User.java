@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
-@Table(name="users")
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue

@@ -16,6 +16,7 @@ import java.util.Set;
 public class Movies {
     @Id @GeneratedValue
     private Integer id;
+
     @Column(name="movieName",length = 100)
     private String movieName;
     @Column(name="release_date")
@@ -26,6 +27,8 @@ public class Movies {
     private Long duration;
     @Column(name = "income")
     private Long income;
+    @Column(name = "score")
+    private Double score;
     @OneToMany(mappedBy = "movies")
     Set<Favorite>favorites;
     @OneToMany(mappedBy = "movies")
