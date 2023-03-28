@@ -34,15 +34,9 @@ public class ActorsController {
         }
     }
 
-    /*@GetMapping("/actors")
-    public List<Actors> findActorByName(@RequestBody Actors actors) {
-        System.out.println(actors);
-        return actorsService.findActorByName(actors.getName(), actors.getLastName());
-    }*/
-
     @GetMapping("/actors")
-    public List<Actors> findActorsByName(@PathVariable String name, @PathVariable String lastname) {
-        return actorsService.findActorsByName(name, lastname);
+    public List<Actors> getActorByNameAndLastName(@RequestBody Actors actors) {
+        return actorsService.findActorsByNameAndLastName(actors.getName(),actors.getLastName());
     }
 
     @PostMapping("/actors")

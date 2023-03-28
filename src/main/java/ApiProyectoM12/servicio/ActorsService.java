@@ -17,4 +17,5 @@ public class ActorsService {
     public List<Actors> findActorsByName(String name, String lastname) {return actorsRepository.findByActorName(name, lastname);
     }
     public void deleteActors(Integer id){actorsRepository.deleteById(id);}
+    public List<Actors> findActorsByNameAndLastName(String name, String lastName){return actorsRepository.findActorsByNameAndLastName(name,lastName);}
 }
