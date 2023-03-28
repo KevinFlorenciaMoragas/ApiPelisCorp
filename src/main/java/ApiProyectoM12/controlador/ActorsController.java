@@ -15,7 +15,7 @@ import java.util.List;
 public class ActorsController {
     private final ActorsService actorsService;
 
-    @GetMapping("/actors")
+    @GetMapping("/allActors")
     public List<Actors> listActors() {
         return actorsService.listActors();
     }
@@ -29,7 +29,10 @@ public class ActorsController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @GetMapping("/actors")
+    public List<Actors> getActorByNameAndLastName(@RequestBody Actors actors) {
+        return actorsService.findActorsByNameAndLastName(actors.getName(),actors.getLastName());
+    }
     @PostMapping("/actors")
     public ResponseEntity<Actors> newActor(@RequestBody Actors actors) {
         try {
