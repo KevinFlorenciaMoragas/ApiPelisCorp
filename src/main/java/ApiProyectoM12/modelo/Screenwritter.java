@@ -15,9 +15,9 @@ import java.util.Set;
 public class Screenwritter {
 @Id @GeneratedValue
     private Integer id;
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
-    @Column(name = "lastName")
+    @Column(name = "lastName", length = 50)
     private String lastName;
     @OneToMany(mappedBy = "screenwritter")
     Set<MovieScreenwritter> movieScreenwritters;

@@ -13,11 +13,17 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "username", nullable = false)
+
+    @Column(name = "name", nullable = false, length = 20)
+    private String name;
+
+    @Column(name = "last_name", nullable = false, length = 20)
+    private String last_name;
+    @Column(name = "username", nullable = false, length = 20)
     private String username;
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 8000)
     private String password;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 120)
     private String email;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -6,8 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -15,7 +19,7 @@ import java.util.List;
 public class ActorsController {
     private final ActorsService actorsService;
 
-    @GetMapping("/actors")
+    @GetMapping("/allActors")
     public List<Actors> listActors() {
         return actorsService.listActors();
     }
@@ -28,6 +32,17 @@ public class ActorsController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /*@GetMapping("/actors")
+    public List<Actors> findActorByName(@RequestBody Actors actors) {
+        System.out.println(actors);
+        return actorsService.findActorByName(actors.getName(), actors.getLastName());
+    }*/
+
+    @GetMapping("/actors")
+    public List<Actors> findActorsByName(@PathVariable String name, @PathVariable String lastname) {
+        return actorsService.findActorsByName(name, lastname);
     }
 
     @PostMapping("/actors")

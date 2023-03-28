@@ -16,9 +16,9 @@ public class Awards {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "name")
+    @Column(name = "name", length = 200)
     private String name;
-    @Column(name = "festival")
+    @Column(name = "festival", length = 200)
     private String festival;
     @OneToMany(mappedBy = "awards")
     Set<MovieAward> movieAwards;
