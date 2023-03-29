@@ -16,7 +16,6 @@ public class User {
 
     @Column(name = "name", nullable = false, length = 20)
     private String name;
-
     @Column(name = "last_name", nullable = false, length = 20)
     private String last_name;
     @Column(name = "username", nullable = false, length = 20)
@@ -25,7 +24,8 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
-
+    @Column(name = "photo")
+    private String photo;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userRol_id")
    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

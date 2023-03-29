@@ -20,6 +20,8 @@ public class Actors {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
+    @Column(name = "photo")
+    private String photo;
     @OneToMany(mappedBy = "actors")
     Set<MovieActor> movieActors;
     @OneToMany(mappedBy = "actors")

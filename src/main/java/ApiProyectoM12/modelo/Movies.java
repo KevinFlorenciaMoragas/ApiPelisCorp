@@ -29,6 +29,8 @@ public class Movies {
     private Long income;
     @Column(name = "score")
     private Double score;
+    @Column(name = "photo")
+    private String photo;
     @OneToMany(mappedBy = "movies")
     Set<Favorite>favorites;
     @OneToMany(mappedBy = "movies")
