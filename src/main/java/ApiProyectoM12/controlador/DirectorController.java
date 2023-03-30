@@ -14,7 +14,7 @@ import java.util.List;
 public class DirectorController {
     private final DirectorService directorService;
 
-    @GetMapping("/director")
+    @GetMapping("/allDirectors")
     public List<Director> listDirector() {
         return directorService.listDirector();
     }
