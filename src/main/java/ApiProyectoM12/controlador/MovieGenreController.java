@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.MovieGenre;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieGenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class MovieGenreController {
         }catch (Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{generoId}/moviesgenre")
+    public List<Movies> getMoviesbyGenre(@PathVariable Long generoId) {
+        return movieGenreService.getMoviesbyGenre(generoId);
     }
     @PostMapping("/movieGenre")
     public ResponseEntity<MovieGenre> newMovieGenre(@RequestBody MovieGenre movieGenre){

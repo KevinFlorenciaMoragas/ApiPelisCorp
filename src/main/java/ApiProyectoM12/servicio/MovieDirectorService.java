@@ -1,19 +1,33 @@
 package ApiProyectoM12.servicio;
 
 import ApiProyectoM12.modelo.MovieDirector;
+import ApiProyectoM12.modelo.Movies;
+import ApiProyectoM12.modelo.Director;
 import ApiProyectoM12.repositorio.MovieDirectorRepository;
+import ApiProyectoM12.repositorio.MoviesRepository;
+import ApiProyectoM12.repositorio.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class MovieDirectorService {
     @Autowired
     private MovieDirectorRepository movieDirectorRepository;
+    @Autowired
+    private MoviesRepository moviesRepository;
 
     public List<MovieDirector> listMovieDirector(){return movieDirectorRepository.findAll();}
     public void saveMovieDirector(MovieDirector movieDirector){movieDirectorRepository.save(movieDirector);}
     public MovieDirector findMovieDirectorById(Integer id){return movieDirectorRepository.findById(id).get();}
     public void deleteMovieDirector(Integer id){movieDirectorRepository.deleteById(id);}
-//    public List<MovieDirector> findByDirector(Integer id){return movieDirectorRepository.findbyDirector(id);}
+    public List<Movies> getmoviesbydirector(Integer directorId) {
+        List<MovieDirector> movieDirectorList = movieDirectorRepository.findByDirectorId(directorId);
+        List<Movies> peliculas = movieDirectorList.stream().map(MovieDirector::getMovies).collect(Collectors.toList());
+        return peliculas;
+    }
+
 }

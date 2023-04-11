@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.MovieAward;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieAwardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,10 @@ public class MovieAwardController {
         }
     }
 
+    @GetMapping("/{awards}/moviesAward")
+    public List<Movies> getMoviesbyAwards(@PathVariable String awards) {
+        return movieAwardService.getMoviesbyAwards(awards);
+    }
     @PutMapping("/movieAward/{id}")
     public ResponseEntity<?> editMovieAward(@RequestBody MovieAward movieAward, @PathVariable Integer id) {
         try {
