@@ -2,10 +2,8 @@ package ApiProyectoM12.servicio;
 
 import ApiProyectoM12.modelo.MovieDirector;
 import ApiProyectoM12.modelo.Movies;
-import ApiProyectoM12.modelo.Director;
 import ApiProyectoM12.repositorio.MovieDirectorRepository;
 import ApiProyectoM12.repositorio.MoviesRepository;
-import ApiProyectoM12.repositorio.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

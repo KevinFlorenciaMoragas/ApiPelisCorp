@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.MovieActor;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,11 @@ public class MovieActorController {
             return ResponseEntity.notFound().build();
         }
     }
+/*
+    @GetMapping("/{id}/moviesActor")
+    public List<Movies> getmoviesbyactor(@PathVariable Integer id) {
+        return movieActorService.getmoviesbyactor(id);
+    }*/
 
     @PostMapping("/movieActor")
     public ResponseEntity<MovieActor> newMovieActor(@RequestBody MovieActor movieActor) {

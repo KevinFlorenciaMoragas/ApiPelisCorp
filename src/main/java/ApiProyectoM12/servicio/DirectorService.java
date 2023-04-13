@@ -1,5 +1,6 @@
 package ApiProyectoM12.servicio;
 
+import ApiProyectoM12.modelo.Actors;
 import ApiProyectoM12.modelo.Director;
 import ApiProyectoM12.repositorio.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +17,6 @@ public class DirectorService {
     public void saveDirector(Director director){directorRepository.save(director);}
     public Director findDirectorById(Integer id){return directorRepository.findById(id).get();}
     public void deleteDirector(Integer id){directorRepository.deleteById(id);}
+
+    public List<Director> findDirectorByNameAndLastName(String name, String lastName){return directorRepository.findDirectorByNameAndLastName(name,lastName);}
 }

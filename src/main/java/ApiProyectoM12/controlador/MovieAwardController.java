@@ -41,10 +41,10 @@ public class MovieAwardController {
         }
     }
 
-    @GetMapping("/{awards}/moviesAward")
+    /*@GetMapping("/{awards}/moviesAward")
     public List<Movies> getMoviesbyAwards(@PathVariable String awards) {
         return movieAwardService.getMoviesbyAwards(awards);
-    }
+    }*/
     @PutMapping("/movieAward/{id}")
     public ResponseEntity<?> editMovieAward(@RequestBody MovieAward movieAward, @PathVariable Integer id) {
         try {
