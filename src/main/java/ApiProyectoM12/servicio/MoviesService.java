@@ -18,7 +18,6 @@ public class MoviesService {
     public void saveMovie(Movies movies){moviesRepository.save(movies);}
     public Movies findMovieById(Integer id){return moviesRepository.findById(id).get();}
 
-    public List<Movies> findMovieByName(String movieName){return moviesRepository.findByMovieName(movieName);}
 
     public void deleteMovie(Integer id){moviesRepository.deleteById(id);}
     public List<Movies> findTopByOrderByScoreDesc(){return moviesRepository.findTopByOrderByScoreDesc();}

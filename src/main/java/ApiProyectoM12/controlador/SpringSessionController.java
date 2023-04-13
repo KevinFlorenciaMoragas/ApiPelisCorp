@@ -41,17 +41,12 @@ public class SpringSessionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor");
         }
     }
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        System.out.println("Entramos en logout");
         HttpSession session = request.getSession();
         session.invalidate();
-        return "redirect:/";
+        return  ResponseEntity.ok("Sesión cerrada");
     }
-
-    @GetMapping("/login")
-    public String login(@RequestParam (required = false) String error, Model model) {
-        if(error!= null)
-            model.addAttribute("error", error);
-        return "login";
-    }
+    
 }
