@@ -4,22 +4,34 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 @Table(name="user")
 public class User {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    private UUID id;
 
-    @Column(name = "name", nullable = false, length = 20)
+    @Column(name = "name", nullable = false, updatable = false, length = 20)
     private String name;
 
-    @Column(name = "last_name", nullable = false, length = 20)
+    @Column(name = "last_name", nullable = false,updatable = false, length = 20)
     private String last_name;
-    @Column(name = "username", nullable = false, length = 20)
+    @Column(name = "username", nullable = false,updatable = false, length = 20)
     private String username;
     @Column(name = "password", nullable = false, length = 8000)
     private String password;
