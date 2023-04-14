@@ -18,7 +18,11 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="user")
 public class User implements UserDetails {
@@ -35,10 +39,8 @@ public class User implements UserDetails {
             }
     )
     private UUID id;
-
     @Column(name = "name", nullable = false, updatable = false, length = 20)
     private String name;
-
     @Column(name = "last_name", nullable = false,updatable = false, length = 20)
     private String last_name;
     @Column(name = "username", nullable = false,updatable = false, length = 20)
@@ -47,6 +49,8 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
+    @Column(name = "avatar", nullable = false)
+    private String avatar;
     @Builder.Default
     private boolean accountNotExpired = true;
     @Builder.Default
@@ -77,24 +81,32 @@ public class User implements UserDetails {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
+    @Override
+    public String getUsername() {
+        return username;
+    }
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return accountNotExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return accountNotLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return credentialsNotExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 }

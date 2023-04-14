@@ -1,5 +1,7 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.dto.CreateUserRequest;
+import ApiProyectoM12.dto.UserResponse;
 import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.servicio.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +31,36 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
+/*
     @PostMapping("/user")
-    public ResponseEntity<User> newUser(@RequestBody User user) {
+    public ResponseEntity<User> newUser(@RequestBody Crea user) {
         try {
             System.out.println(user);
             userService.saveUser(user);
             return null;
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+*/
+    @PostMapping("/auth/register")
+    public ResponseEntity<UserResponse> createUserWithUserRol(@RequestBody CreateUserRequest createUserRequest) {
+        try {
+            User user = userService.createUserWithUserRol(createUserRequest);
+            System.out.println("El user " +user);
+            UserResponse userResponse = UserResponse.fromUser(userService.createUserWithUserRol(createUserRequest));
+            return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping("/auth/register/admin")
+    public ResponseEntity<UserResponse> createUserWithAdminRol(@RequestBody CreateUserRequest createUserRequest) {
+        try {
+            User user = userService.createUserWithAdminRol(createUserRequest);
+
+            UserResponse userResponse = UserResponse.fromUser(userService.createUserWithAdminRol(createUserRequest));
+            return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -45,6 +70,7 @@ public class UserController {
     public ResponseEntity<?> editUser(@RequestBody User user, @PathVariable Integer id) {
         try {
             User userExist = userService.findUserById(id);
+
             userExist.setName(user.getName());
             userExist.setLast_name(user.getLast_name());
             userExist.setUsername(user.getUsername());
@@ -53,14 +79,16 @@ public class UserController {
             userExist.setUserRol(user.getUserRol());
             userExist.setUserReviews(user.getUserReviews());
             userExist.setFavorites(user.getFavorites());
+
             // userExist.setId_rol(user.getId_rol());
-            userService.saveUser(userExist);
+
             return new ResponseEntity<User>(userExist, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @DeleteMapping("/user/{id}")
 

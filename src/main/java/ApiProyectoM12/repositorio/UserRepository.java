@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("SELECT u FROM User u WHERE u.username = ?1 and u.password = ?2")
     User findByUsernameAndPassword(String username, String password);
+    User findByUsername(String username);
 }
