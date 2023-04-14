@@ -19,8 +19,8 @@ public class MovieAwardService {
     public void saveMovieAward(MovieAward movieAward){movieAwardRepository.save(movieAward);}
     public MovieAward findMovieAwardById(Integer id){return movieAwardRepository.findById(id).get();}
 
-    /*public List<Movies> getMoviesbyAwards(String awards) {
-        List<MovieAward> movieAwardList = movieAwardRepository.findByAwardName(awards);
+    /*public List<Movies> getmoviesbyAwardsid(Integer awardId) {
+        List<MovieAward> movieAwardList = movieAwardRepository.findByAwardId(awardId);
         List<Movies> movies = movieAwardList.stream().map(MovieAward::getMovies).collect(Collectors.toList());
         return movies;
     }*/
