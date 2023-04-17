@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -19,20 +20,22 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> listUser(){return userRepository.findAll();}
-    public User saveUser(CreateUserRequest createUserRequest, EnumSet<UserRolEnum> roles){
+    public User saveUser(CreateUserRequest createUserRequest, Set<UserRolEnum> roles){
+
         User user = User.builder()
                 .username(createUserRequest.getUsername())
-                .password(passwordEncoder.passwordEncoder().encode(createUserRequest.getPassword()))
+                //Hay que poner el password encriptado
+                .password(createUserRequest.getPassword())
                 .email(createUserRequest.getEmail())
                 .name(createUserRequest.getName())
                 .last_name(createUserRequest.getLast_name())
                 .avatar(createUserRequest.getAvatar())
                 .rolEnums(roles)
                 .build();
+        System.out.println("El usuario en saveUSer " + user);
     return userRepository.save(user);
     }
     public User createUserWithUserRol(CreateUserRequest createUserRequest){
-        System.out.println("El usuario es " +createUserRequest);
         return saveUser(createUserRequest, EnumSet.of(UserRolEnum.USER));
     }
     public User createUserWithAdminRol(CreateUserRequest createUserRequest){

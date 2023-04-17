@@ -47,7 +47,7 @@ public class UserController {
     public ResponseEntity<UserResponse> createUserWithUserRol(@RequestBody CreateUserRequest createUserRequest) {
         try {
             User user = userService.createUserWithUserRol(createUserRequest);
-            System.out.println("El user " +user);
+            System.out.println("El user " + user);
             UserResponse userResponse = UserResponse.fromUser(userService.createUserWithUserRol(createUserRequest));
             return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
         } catch (Exception e) {
