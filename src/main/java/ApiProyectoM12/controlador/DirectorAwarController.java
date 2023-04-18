@@ -15,39 +15,39 @@ import java.util.List;
 public class DirectorAwarController {
     private final DirectorAwardService directorAwardService;
 
-    @GetMapping("/actorAward")
-    public List<DirectorAward> listActorAward() {
+    @GetMapping("/directorAward")
+    public List<DirectorAward> listDirectorAward() {
         return directorAwardService.listDirectorAward();
     }
 
-    @GetMapping("/actorAward/{id}")
+    @GetMapping("/directorAward/{id}")
     public ResponseEntity<DirectorAward> getAwardsById(@PathVariable Integer id) {
         try {
-            DirectorAward actorAward = directorAwardService.findDirectorAwardById(id);
-            return ResponseEntity.ok(actorAward);
+            DirectorAward directorAward = directorAwardService.findDirectorAwardById(id);
+            return ResponseEntity.ok(directorAward);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/actorAward")
-    public ResponseEntity<DirectorAward> newActorAward(@RequestBody DirectorAward actorAward) {
+    @PostMapping("/directorAward")
+    public ResponseEntity<DirectorAward> newDirectorAward(@RequestBody DirectorAward directorAward) {
         try {
-            System.out.println(actorAward);
-            directorAwardService.saveDirectorAward(actorAward);
+            System.out.println(directorAward);
+            directorAwardService.saveDirectorAward(directorAward);
             return null;
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/actorAward/{id}")
-    public ResponseEntity<?> editActorAward(@RequestBody DirectorAward directorAward, @PathVariable Integer id) {
+    @PutMapping("/directorAward/{id}")
+    public ResponseEntity<?> editDirectorAward(@RequestBody DirectorAward directorAward, @PathVariable Integer id) {
         try {
             DirectorAward directorAwardExist = directorAwardService.findDirectorAwardById(id);
             directorAwardExist.setDate(directorAward.getDate());
             directorAwardExist.setNomineeWinner(directorAward.getNomineeWinner());
-            directorAwardExist.setActors(directorAward.getActors());
+            directorAwardExist.setDirector(directorAward.getDirector());
             directorAwardExist.setAwards(directorAward.getAwards());
             directorAwardService.saveDirectorAward(directorAwardExist);
             return new ResponseEntity<DirectorAward>(directorAwardExist, HttpStatus.OK);
@@ -57,9 +57,9 @@ public class DirectorAwarController {
         }
     }
 
-    @DeleteMapping("/actorAward/{id}")
+    @DeleteMapping("/directorAward/{id}")
 
-    public void deleteActorAward(@PathVariable Integer id) {
+    public void deleteDirectorAward(@PathVariable Integer id) {
         directorAwardService.deleteDirectorAward(id);
     }
 }

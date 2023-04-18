@@ -20,7 +20,7 @@ public class ActorAward {
     @Column(name = "nominee_winner")
     private Boolean nomineeWinner;
     @ManyToOne
-    @JoinColumn(name = "id_actor")
+    @JoinColumn(name = "id_actor" )
     Actors actors;
     @ManyToOne
     @JoinColumn(name = "id_award")

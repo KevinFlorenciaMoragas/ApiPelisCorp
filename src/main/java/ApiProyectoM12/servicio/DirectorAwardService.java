@@ -13,7 +13,7 @@ public class DirectorAwardService {
     private DirectorAwardRepository directorAwardRepository;
 
     public List<DirectorAward> listDirectorAward(){return directorAwardRepository.findAll();}
-    public void saveDirectorAward(DirectorAward actorAward){directorAwardRepository.save(actorAward);}
+    public void saveDirectorAward(DirectorAward directorAward){directorAwardRepository.save(directorAward);}
     public DirectorAward findDirectorAwardById(Integer id){return directorAwardRepository.findById(id).get();}
     public void deleteDirectorAward(Integer id){directorAwardRepository.deleteById(id);}
 }

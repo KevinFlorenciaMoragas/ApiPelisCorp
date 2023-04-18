@@ -13,7 +13,7 @@ public class ScreenwritterAwardService {
     private ScreenwritterAwardRepository screenwritterAwardRepository;
 
     public List<ScreenwritterAward> listScreenwritterAward(){return screenwritterAwardRepository.findAll();}
-    public void saveScreenwritterAward(ScreenwritterAward actorAward){screenwritterAwardRepository.save(actorAward);}
+    public void saveScreenwritterAward(ScreenwritterAward screenwritterAward){screenwritterAwardRepository.save(screenwritterAward);}
     public ScreenwritterAward findScreenwritterAwardById(Integer id){return screenwritterAwardRepository.findById(id).get();}
     public void deleteScreenwritterAward(Integer id){screenwritterAwardRepository.deleteById(id);}
 }
