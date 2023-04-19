@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -23,10 +24,20 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+    /*public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         try {
             User user = userService.findUserById(id);
             return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    */
+    public ResponseEntity<UserResponse> getUserByUUID(@PathVariable UUID id) {
+        try {
+            User user = userService.findUserByUUID(id);
+            UserResponse userResponse = UserResponse.fromUser(user);
+            return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

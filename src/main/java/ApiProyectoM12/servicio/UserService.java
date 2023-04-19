@@ -8,10 +8,7 @@ import ApiProyectoM12.security.PasswordEncoderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -41,7 +38,10 @@ public class UserService {
     public User createUserWithAdminRol(CreateUserRequest createUserRequest){
         return saveUser(createUserRequest, EnumSet.of(UserRolEnum.ADMIN));
     }
-    public User findUserById(Integer id){return userRepository.findById(id).get();}
+    public Optional<User> findUserByID (UUID id){
+        return userRepository.findById(id);
+    }
+    //public User findUserById(Integer id){return userRepository.findById(id).get();}
     public void deleteUser(Integer id){userRepository.deleteById(id);}
     public User findByUsernameAndPassword(String username, String password){return userRepository.findByUsernameAndPassword(username,password);}
     public User findByUsername(String username){return userRepository.findByUsername(username);}
