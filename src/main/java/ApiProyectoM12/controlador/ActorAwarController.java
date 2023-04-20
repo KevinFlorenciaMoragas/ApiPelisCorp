@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.ActorAward;
+import ApiProyectoM12.modelo.Awards;
 import ApiProyectoM12.servicio.ActorAwardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class ActorAwarController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{actorAwardId}/actorAward")
+    public List<Awards> getAwardsbyActor(@PathVariable Integer id_actor) {
+        return actorAwardService.getAwardsbyActor(id_actor);
     }
 
     @PostMapping("/actorAward")

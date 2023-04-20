@@ -1,5 +1,6 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.Awards;
 import ApiProyectoM12.modelo.DirectorAward;
 import ApiProyectoM12.servicio.DirectorAwardService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,10 @@ public class DirectorAwarController {
         }
     }
 
+    @GetMapping("/{directorId}/directorAward")
+    public List<Awards> getAwardsbyDirector(@PathVariable Long directorId) {
+        return directorAwardService.getAwardsbyDirector(directorId);
+    }
     @PostMapping("/directorAward")
     public ResponseEntity<DirectorAward> newDirectorAward(@RequestBody DirectorAward directorAward) {
         try {

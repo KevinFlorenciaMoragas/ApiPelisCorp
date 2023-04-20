@@ -1,5 +1,6 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.Awards;
 import ApiProyectoM12.modelo.ScreenwritterAward;
 import ApiProyectoM12.servicio.ScreenwritterAwardService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,11 @@ public class ScreenwritterAwardController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{screenwritterAwardId}/screenwritterAward")
+    public List<Awards> getMoviesbyGenre(@PathVariable Integer screenwritterAwardId) {
+        return screenwritterAwardService.getAwardsbyScreenwritter(screenwritterAwardId);
     }
 
     @PostMapping("/screenwritterAward")
