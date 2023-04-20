@@ -22,6 +22,7 @@ public class SpringSessionController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request, Model model) {
         System.out.println("Entramos en login");
+
         try {
             User userExist = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             if (userExist!= null) {
