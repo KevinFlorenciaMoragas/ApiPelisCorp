@@ -1,5 +1,6 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.Actors;
 import ApiProyectoM12.modelo.Director;
 import ApiProyectoM12.servicio.DirectorService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 public class DirectorController {
     private final DirectorService directorService;
 
-    @GetMapping("/director")
+    @GetMapping("/allDirector")
     public List<Director> listDirector() {
         return directorService.listDirector();
     }
@@ -27,6 +28,11 @@ public class DirectorController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/director")
+    public List<Director> getDirectorByNameAndLastName(@RequestBody Director director) {
+        return directorService.findDirectorByNameAndLastName(director.getName(),director.getLastName());
     }
 
     @PostMapping("/director")

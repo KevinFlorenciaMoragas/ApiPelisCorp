@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.MovieActor;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,20 @@ public class MovieActorController {
         }
     }
 
+    @GetMapping("/{actorId}/movieActor")
+    public List<Movies> getMoviesByActor(@PathVariable Integer actorId) {
+        return movieActorService.getMoviesByActor(actorId);
+    }
+
+    @GetMapping("/{actorId}/moviesActorASC")
+    public List<Movies> findMoviesByActorIdOrderByScoreAsc(@PathVariable Integer actorId) {
+        return movieActorService.findMoviesByActorIdOrderByScoreAsc(actorId);
+    }
+
+    @GetMapping("/{actorId}/moviesActorDESC")
+    public List<Movies> findMoviesByActorIdOrderByScoreDesc(@PathVariable Integer actorId) {
+        return movieActorService.findMoviesByActorIdOrderByScoreDesc(actorId);
+    }
     @PostMapping("/movieActor")
     public ResponseEntity<MovieActor> newMovieActor(@RequestBody MovieActor movieActor) {
         try {

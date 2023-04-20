@@ -48,7 +48,7 @@ public class MoviesController {
         return moviesService.findMoviesByReleaseDate(releaseDate);
         //return ResponseEntity.ok(movie);
     }*/
-    @GetMapping("/movies?name={movieName}")
+    @GetMapping("/movies")
     public Movies getMovieByMovieName(@RequestBody Movies movie) {
         System.out.println(movie.getMovieName());
         movie = moviesService.findMoviesByMovieName(movie.getMovieName());

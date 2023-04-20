@@ -1,13 +1,16 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.MovieDirector;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieDirectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -41,6 +44,20 @@ public class MovieDirectorController {
         }
     }
 
+    @GetMapping("/{id}/moviesDirector")
+    public List<Movies> getmoviesbydirector(@PathVariable Integer id) {
+        return movieDirectorService.getmoviesbydirector(id);
+    }
+
+    @GetMapping("/{directorId}/moviesDirectorASC")
+    public List<Movies> getMoviesByDirectorIdOrderByScoreAsc(@PathVariable Integer directorId) {
+        return movieDirectorService.findMoviesByDirectorIdOrderByScoreAsc(directorId);
+    }
+
+    @GetMapping("/{directorId}/moviesDirectorDESC")
+    public List<Movies> getMoviesByDirectorIdOrderByScoreDesc(@PathVariable Integer directorId) {
+        return movieDirectorService.findMoviesByDirectorIdOrderByScoreDesc(directorId);
+    }
     @PutMapping("/movieDirector/{id}")
     public ResponseEntity<?> editMovieDirector(@RequestBody MovieDirector movieDirector, @PathVariable Integer id) {
         try {
