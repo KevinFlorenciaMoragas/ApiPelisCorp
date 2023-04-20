@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface MovieAwardRepository extends JpaRepository<MovieAward,Integer> {
     /*List<MovieAward> findByAwardName(String awardName);*/
+
     List<MovieAward> findByAwardsId(Integer awardsId);
 
 }

@@ -17,4 +17,5 @@ public interface MovieActorRepository extends JpaRepository<MovieActor,Integer> 
 
     @Query("SELECT m, md FROM MovieActor md JOIN md.movies m WHERE md.actors.id = :actorId ORDER BY m.score DESC")
     List<Movies> findMoviesByActorIdOrderByScoreDesc(@Param("actorId") Integer actorId);
+
 }

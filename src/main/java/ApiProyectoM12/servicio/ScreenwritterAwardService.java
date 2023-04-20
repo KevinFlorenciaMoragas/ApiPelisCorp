@@ -26,5 +26,4 @@ public class ScreenwritterAwardService {
         List<Awards> awards = movieGenreList.stream().map(ScreenwritterAward::getAwards).collect(Collectors.toList());
         return awards;
     }
-
 }

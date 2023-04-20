@@ -27,6 +27,7 @@ public class MovieDirectorService {
         List<Movies> peliculas = movieDirectorList.stream().map(MovieDirector::getMovies).collect(Collectors.toList());
         return peliculas;
     }
+
     public List<Movies> findMoviesByDirectorIdOrderByScoreAsc(Integer directorId) {
         return movieDirectorRepository.findMoviesByDirectorIdOrderByScoreAsc(directorId);
     }

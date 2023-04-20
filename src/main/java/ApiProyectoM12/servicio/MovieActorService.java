@@ -24,6 +24,7 @@ public class MovieActorService {
         List<Movies> movies = movieActorList.stream().map(MovieActor::getMovies).collect(Collectors.toList());
         return movies;
     }
+
     public List<Movies> findMoviesByActorIdOrderByScoreAsc(Integer directorId) {
         return movieActorRepository.findMoviesByActorIdOrderByScoreAsc(directorId);
     }
@@ -31,4 +32,5 @@ public class MovieActorService {
     public List<Movies> findMoviesByActorIdOrderByScoreDesc(Integer directorId) {
         return movieActorRepository.findMoviesByActorIdOrderByScoreDesc(directorId);
     }
+
 }

@@ -58,6 +58,7 @@ public class MovieDirectorController {
     public List<Movies> getMoviesByDirectorIdOrderByScoreDesc(@PathVariable Integer directorId) {
         return movieDirectorService.findMoviesByDirectorIdOrderByScoreDesc(directorId);
     }
+
     @PutMapping("/movieDirector/{id}")
     public ResponseEntity<?> editMovieDirector(@RequestBody MovieDirector movieDirector, @PathVariable Integer id) {
         try {

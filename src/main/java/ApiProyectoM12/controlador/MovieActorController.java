@@ -44,6 +44,7 @@ public class MovieActorController {
     public List<Movies> findMoviesByActorIdOrderByScoreDesc(@PathVariable Integer actorId) {
         return movieActorService.findMoviesByActorIdOrderByScoreDesc(actorId);
     }
+
     @PostMapping("/movieActor")
     public ResponseEntity<MovieActor> newMovieActor(@RequestBody MovieActor movieActor) {
         try {

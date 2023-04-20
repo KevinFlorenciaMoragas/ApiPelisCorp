@@ -24,5 +24,6 @@ public class MovieAwardService {
         List<Movies> movies = movieAwardList.stream().map(MovieAward::getMovies).collect(Collectors.toList());
         return movies;
     }
+
     public void deleteMovieAward(Integer id){movieAwardRepository.deleteById(id);}
 }
