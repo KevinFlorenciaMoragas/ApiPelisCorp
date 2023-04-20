@@ -31,8 +31,8 @@ public class MovieActorController {
     }
 
     @GetMapping("/{actorId}/movies")
-    public List<Movies> getMoviesByActor(@PathVariable Integer id_actor) {
-        return movieActorService.findMoviesByActorId(id_actor);
+    public List<Movies> getMoviesByActor(@PathVariable Integer actorId) {
+        return movieActorService.getMoviesByActor(actorId);
     }
 
     @PostMapping("/movieActor")

@@ -19,9 +19,9 @@ public class MovieActorService {
     public void saveMovieActor(MovieActor movieActor){movieActorRepository.save(movieActor);}
     public MovieActor findMovieActorById(Integer id){return movieActorRepository.findById(id).get();}
     public void deleteMovieActor(Integer id){movieActorRepository.deleteById(id);}
-    public List<Movies> findMoviesByActorId(Integer id_actor) {
-        List<MovieActor> movieActors = movieActorRepository.findByActorId(id_actor);
-        List<Movies> movies = movieActors.stream().map(MovieActor::getMovies).collect(Collectors.toList());
+    public List<Movies> getMoviesByActor(Integer actorId) {
+        List<MovieActor> movieActorList = movieActorRepository.findByActorsId(actorId);
+        List<Movies> movies = movieActorList.stream().map(MovieActor::getMovies).collect(Collectors.toList());
         return movies;
     }
 }
