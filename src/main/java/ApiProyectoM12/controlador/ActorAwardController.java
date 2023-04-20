@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-public class ActorAwarController {
+public class ActorAwardController {
     private final ActorAwardService actorAwardService;
 
     @GetMapping("/actorAward")
@@ -30,9 +30,10 @@ public class ActorAwarController {
         }
     }
 
-    @GetMapping("/{actorAwardId}/actorAward")
-    public List<Awards> getAwardsbyActor(@PathVariable Integer id_actor) {
-        return actorAwardService.getAwardsbyActor(id_actor);
+    @GetMapping("/{actorid}/actorAward")
+    public List<Awards> getAwardsbyActor(@PathVariable Integer actorid) {
+        System.out.println("Actor="+ actorid);
+        return actorAwardService.getAwardsbyActor(actorid);
     }
 
     @PostMapping("/actorAward")

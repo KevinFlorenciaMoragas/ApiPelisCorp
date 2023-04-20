@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ActorAwardRepository extends JpaRepository<ActorAward,Integer> {
 
-    List<ActorAward> findByActorId(Integer id_actor);
+    List<ActorAward> findByActorsId(Integer id);
 }

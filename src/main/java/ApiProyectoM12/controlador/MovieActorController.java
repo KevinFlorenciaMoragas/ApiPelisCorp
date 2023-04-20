@@ -29,11 +29,11 @@ public class MovieActorController {
             return ResponseEntity.notFound().build();
         }
     }
-/*
-    @GetMapping("/{id}/moviesActor")
-    public List<Movies> getmoviesbyactor(@PathVariable Integer id) {
-        return movieActorService.getmoviesbyactor(id);
-    }*/
+
+    @GetMapping("/{actorId}/movies")
+    public List<Movies> getMoviesByActor(@PathVariable Integer id_actor) {
+        return movieActorService.findMoviesByActorId(id_actor);
+    }
 
     @PostMapping("/movieActor")
     public ResponseEntity<MovieActor> newMovieActor(@RequestBody MovieActor movieActor) {

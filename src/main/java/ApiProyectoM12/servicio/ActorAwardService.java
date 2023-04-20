@@ -19,8 +19,10 @@ public class ActorAwardService {
     public ActorAward findActorAwardById(Integer id){return actorAwardRepository.findById(id).get();}
     public void deleteActorAward(Integer id){actorAwardRepository.deleteById(id);}
 
-    public List<Awards> getAwardsbyActor(Integer id_actor) {
-        List<ActorAward> actorAwardList = actorAwardRepository.findByActorId(id_actor);
+    public List<Awards> getAwardsbyActor(Integer actorid) {
+        System.out.println("Actor="+ actorid);
+        List<ActorAward> actorAwardList = actorAwardRepository.findByActorsId(actorid);
+        System.out.println("ActorAward="+ actorAwardList);
         List<Awards> awards = actorAwardList.stream().map(ActorAward::getAwards).collect(Collectors.toList());
         return awards;
     }
