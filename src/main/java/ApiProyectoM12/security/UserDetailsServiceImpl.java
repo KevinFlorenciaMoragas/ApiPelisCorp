@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private MessageSource messages;
     @Autowired
-    private RoleRepository roleRepository;cwd
+    private RoleRepository roleRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user =  userRepository
