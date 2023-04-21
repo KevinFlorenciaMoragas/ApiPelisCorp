@@ -15,4 +15,8 @@ public class UserService {
     public User findUserById(Integer id){return userRepository.findById(id).get();}
     public void deleteUser(Integer id){userRepository.deleteById(id);}
     public User findByUsernameAndPassword(String username, String password){return userRepository.findByUsernameAndPassword(username,password);}
+    public boolean updatePassword(String username, String password, String newpassword) {
+        int filasActualizadas = userRepository.updatePassword(username, password, newpassword);
+        return filasActualizadas > 0;
+    }
 }

@@ -1,5 +1,7 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.Movies;
+import ApiProyectoM12.modelo.Reviews;
 import ApiProyectoM12.modelo.UserReview;
 import ApiProyectoM12.servicio.UserReviewService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +17,7 @@ import java.util.List;
 public class UserReviewController {
     private final UserReviewService userReviewService;
 
-    @GetMapping("/userReview")
+    @GetMapping("/allUserReview")
     public List<UserReview> listUserReview() {
         return userReviewService.listUserReview();
     }
@@ -28,6 +30,10 @@ public class UserReviewController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/{id}/userReview")
+    public List<Reviews> findByUserId(@PathVariable Integer id) {
+        return userReviewService.findByUserId(id);
     }
 
     @PostMapping("/userReview")

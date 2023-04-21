@@ -30,6 +30,15 @@ public class UserController {
         }
     }
 
+    @PostMapping("/updatePassword")
+    public ResponseEntity<?> updatePassword(@RequestBody User user,@RequestParam String newPassword) {
+        boolean actualizacionExitosa = userService.updatePassword(user.getUsername(), user.getPassword(), newPassword);
+        if (actualizacionExitosa) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().body("La contraseña actual es incorrecta.");
+        }
+    }
     @PostMapping("/user")
     public ResponseEntity<User> newUser(@RequestBody User user) {
         try {
