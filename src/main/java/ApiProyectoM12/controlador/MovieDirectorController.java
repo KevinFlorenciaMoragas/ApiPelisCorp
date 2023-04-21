@@ -49,6 +49,16 @@ public class MovieDirectorController {
         return movieDirectorService.getmoviesbydirector(id);
     }
 
+    @GetMapping("/{directorId}/moviesDirectorASC")
+    public List<Movies> getMoviesByDirectorIdOrderByScoreAsc(@PathVariable Integer directorId) {
+        return movieDirectorService.findMoviesByDirectorIdOrderByScoreAsc(directorId);
+    }
+
+    @GetMapping("/{directorId}/moviesDirectorDESC")
+    public List<Movies> getMoviesByDirectorIdOrderByScoreDesc(@PathVariable Integer directorId) {
+        return movieDirectorService.findMoviesByDirectorIdOrderByScoreDesc(directorId);
+    }
+
     @PutMapping("/movieDirector/{id}")
     public ResponseEntity<?> editMovieDirector(@RequestBody MovieDirector movieDirector, @PathVariable Integer id) {
         try {

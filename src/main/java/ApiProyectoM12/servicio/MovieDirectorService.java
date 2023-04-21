@@ -28,4 +28,12 @@ public class MovieDirectorService {
         return peliculas;
     }
 
+    public List<Movies> findMoviesByDirectorIdOrderByScoreAsc(Integer directorId) {
+        return movieDirectorRepository.findMoviesByDirectorIdOrderByScoreAsc(directorId);
+    }
+
+    public List<Movies> findMoviesByDirectorIdOrderByScoreDesc(Integer directorId) {
+        return movieDirectorRepository.findMoviesByDirectorIdOrderByScoreDesc(directorId);
+    }
+
 }

@@ -14,4 +14,6 @@ public interface ActorsRepository extends JpaRepository<Actors,Integer> {
     @Query("select a from Actors a WHERE a.name=?1 OR a.lastName = ?2")
     List<Actors> findActorsByNameAndLastName(String name, String lastName);
 
+
+
 }

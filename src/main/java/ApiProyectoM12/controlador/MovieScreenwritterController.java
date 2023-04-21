@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.MovieScreenwritter;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieScreenwritterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,21 @@ public class MovieScreenwritterController
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{ScreenwritterId}/movieScreenwritter")
+    public List<Movies> getMoviesByScreenwritter(@PathVariable Integer ScreenwritterId) {
+        return movieScreenwritterService.getMoviesByScreenwritter(ScreenwritterId);
+    }
+
+    @GetMapping("/{screenwritterId}/moviesScreenwritterASC")
+    public List<Movies> findMoviesByScreenwritterIdOrderByScoreAsc(@PathVariable Integer screenwritterId) {
+        return movieScreenwritterService.findMoviesByScreenwritterIdOrderByScoreAsc(screenwritterId);
+    }
+
+    @GetMapping("/{screenwritterId}/moviesScreenwritterDESC")
+    public List<Movies> findMoviesByScreenwritterIdOrderByScoreDesc(@PathVariable Integer screenwritterId) {
+        return movieScreenwritterService.findMoviesByScreenwritterIdOrderByScoreDesc(screenwritterId);
     }
 
     @PostMapping("/movieScreenwritter")
