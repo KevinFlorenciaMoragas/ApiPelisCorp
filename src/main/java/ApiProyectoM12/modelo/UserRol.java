@@ -1,5 +1,5 @@
 package ApiProyectoM12.modelo;
-
+/*
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +29,4 @@ public class UserRol {
                )
        private Collection<Privileges> privileges;
    }
-
+*/

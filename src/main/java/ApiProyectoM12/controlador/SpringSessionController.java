@@ -1,5 +1,5 @@
 package ApiProyectoM12.controlador;
-
+/*
 import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.repositorio.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,5 +49,6 @@ public class SpringSessionController {
         session.invalidate();
         return  ResponseEntity.ok("Sesión cerrada");
     }
-    
+
 }
+*/

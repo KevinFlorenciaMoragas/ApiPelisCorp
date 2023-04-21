@@ -3,6 +3,7 @@ package ApiProyectoM12.security;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,12 +23,16 @@ public class WebSecurityConfig  {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
+        System.out.println("Se ha iniciado session");
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
         filter.setAuthenticationManager(authenticationManager);
-        filter.setFilterProcessesUrl("/login2");
+        filter.setFilterProcessesUrl("/login");
         return http
                 .csrf().disable()
+                .cors()
+                .and()
                 .authorizeRequests()
+                .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
