@@ -4,23 +4,29 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @AllArgsConstructor
 @Configuration
-public class WebSecurityConfig  {
+@EnableWebSecurity
+public class WebSecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
-
+    private final MethodSecurityConfig methodSecurityConfig;
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         System.out.println("Se ha iniciado session");
@@ -32,6 +38,10 @@ public class WebSecurityConfig  {
                 .cors()
                 .and()
                 .authorizeRequests()
+                .expressionHandler(methodSecurityConfig.webSecurityExpressionHandler())
+                .requestMatchers(HttpMethod.GET,"/roleHierarchy")
+                .hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST).permitAll()
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest()
                 .authenticated()

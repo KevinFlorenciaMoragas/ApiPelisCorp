@@ -1,5 +1,5 @@
 package ApiProyectoM12.controlador;
-
+/*
 import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.modelo.UserRol;
 import ApiProyectoM12.servicio.UserRolService;
@@ -66,3 +66,4 @@ public class UserRolController {
 
 
 }
+*/

@@ -1,5 +1,5 @@
 package ApiProyectoM12.servicio;
-
+/*
 import ApiProyectoM12.modelo.UserRol;
 import ApiProyectoM12.repositorio.UserRolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,3 +18,4 @@ public class UserRolService
     public UserRol findUserRolById(Integer id){return userRolRepository.findById(id).get();}
     public void deleteUserRol(Integer id){userRolRepository.deleteById(id);}
 }
+*/

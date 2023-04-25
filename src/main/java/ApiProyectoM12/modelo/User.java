@@ -28,6 +28,8 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
 /*
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userRol_id")

@@ -45,12 +45,12 @@ public class UserController {
     public ResponseEntity<?> editUser(@RequestBody User user, @PathVariable Integer id) {
         try {
             User userExist = userService.findUserById(id);
-            userExist.setName(user.getName());
-            userExist.setLast_name(user.getLast_name());
+           /* userExist.setName(user.getName());
+            userExist.setLast_name(user.getLast_name());*/
             userExist.setUsername(user.getUsername());
             userExist.setPassword(user.getPassword());
             userExist.setEmail(user.getEmail());
-            userExist.setUserRol(user.getUserRol());
+            //userExist.setUserRol(user.getUserRol());
             userExist.setUserReviews(user.getUserReviews());
             userExist.setFavorites(user.getFavorites());
             // userExist.setId_rol(user.getId_rol());
