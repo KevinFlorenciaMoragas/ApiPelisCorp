@@ -1,5 +1,5 @@
-package ApiProyectoM12.security;
-
+package ApiProyectoM12.security.config;
+/*
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -23,4 +23,4 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
         expressionHandler.setRoleHierarchy(roleHierarchy());
         return expressionHandler;
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package ApiProyectoM12.security;
+package ApiProyectoM12.security.token;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
