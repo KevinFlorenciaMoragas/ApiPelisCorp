@@ -21,7 +21,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .username(request.getUsername())
-                .email(request.getEmail())
+                //.email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(Role.ROLE_USER.name())
                 .build();
@@ -38,7 +38,11 @@ public class AuthenticationService {
                         authenticationRequest.getPassword()
                 )
         );
-        var user = userRepository.findByUsername(authenticationRequest.getUsername());
+        var user = userRepository.findByUsername(authenticationRequest.getUsername())
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
     }
 }

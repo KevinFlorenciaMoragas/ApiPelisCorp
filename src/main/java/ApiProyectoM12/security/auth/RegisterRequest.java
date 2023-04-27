@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-//@Builder
+@Builder
 @RequiredArgsConstructor
-@NoArgsConstructor
+
 public class RegisterRequest {
     private String username;
     private String email;

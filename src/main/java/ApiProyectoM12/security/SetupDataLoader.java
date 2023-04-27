@@ -1,5 +1,5 @@
 package ApiProyectoM12.security;
-
+/*
 import ApiProyectoM12.modelo.Privileges;
 import ApiProyectoM12.modelo.Role;
 import ApiProyectoM12.modelo.User;
@@ -86,3 +86,4 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
 }
+*/

@@ -6,17 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Table(name="user")
-public class User implements UserDetails {
+public class User implements UserDetails, CredentialsContainer {
     @Id
     @GeneratedValue
     private Integer id;
@@ -24,8 +24,8 @@ public class User implements UserDetails {
     private String username;
     @Column(name = "password", nullable = false, length = 8000)
     private String password;
-    @Column(name = "email", nullable = false, length = 120)
-    private String email;
+   // @Column(name = "email", nullable = false, length = 120)
+   // private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "user")
@@ -58,5 +58,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public void eraseCredentials() {
+        password = null;
     }
 }
