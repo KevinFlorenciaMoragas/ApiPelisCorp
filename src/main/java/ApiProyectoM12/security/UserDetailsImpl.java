@@ -1,5 +1,6 @@
 package ApiProyectoM12.security;
 
+import ApiProyectoM12.modelo.Role;
 import ApiProyectoM12.modelo.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

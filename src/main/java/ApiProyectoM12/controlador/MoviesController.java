@@ -5,6 +5,7 @@ import ApiProyectoM12.servicio.MoviesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -57,6 +58,7 @@ public class MoviesController {
     }
 
     @PostMapping("/movies")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Movies> newMovies(@RequestBody Movies movies) {
         try {
             System.out.println(movies);
