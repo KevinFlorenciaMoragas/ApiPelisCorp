@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static ApiProyectoM12.modelo.Role.ROLE_ADMIN;
-import static ApiProyectoM12.modelo.Role.ROLE_USER;
+import static ApiProyectoM12.modelo.Role.ADMIN;
+import static ApiProyectoM12.modelo.Role.USER;
 
 @CrossOrigin
 @RestController
@@ -42,7 +42,7 @@ public class UserController {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(ROLE_USER);
+            user.setRole(USER);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class UserController {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(ROLE_ADMIN);
+            user.setRole(ADMIN);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {

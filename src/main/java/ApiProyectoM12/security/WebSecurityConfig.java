@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.savedrequest.NullRequestCache;
 
 @AllArgsConstructor
 @Configuration
@@ -28,20 +30,31 @@ public class WebSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
+        
         filter.setAuthenticationManager(authenticationManager);
         filter.setFilterProcessesUrl("/login2");
-        return http
+/*        return http
                 .csrf().disable()
                 .authorizeRequests()
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(filter)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .build();*/
+        return http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
+                authorizeRequests().requestMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.POST, "/user/**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.POST, "/movies/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/routeB/**").hasRole("ADMIN").and().
+                requestCache().requestCache(new NullRequestCache()).and().
+                httpBasic().and().
+                authorizeRequests().anyRequest().authenticated().and().
+                addFilter(filter).addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class).
+                csrf().disable().build();
     }
 
     @Bean
