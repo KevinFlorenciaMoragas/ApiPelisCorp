@@ -30,7 +30,7 @@ public class WebSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
-        
+
         filter.setAuthenticationManager(authenticationManager);
         filter.setFilterProcessesUrl("/login2");
 /*        return http
