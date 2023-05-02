@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static ApiProyectoM12.modelo.Role.ADMIN;
-import static ApiProyectoM12.modelo.Role.USER;
+import static ApiProyectoM12.modelo.Role.*;
 
 @CrossOrigin
 @RestController
@@ -21,7 +20,9 @@ import static ApiProyectoM12.modelo.Role.USER;
 public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @GetMapping("/user")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> listUser() {
         return userService.listUser();
     }
@@ -37,12 +38,12 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> newUser(@RequestBody User user) {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(USER);
+            user.setRole(ROLE_USER);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {
@@ -50,11 +51,12 @@ public class UserController {
         }
     }
     @PostMapping("/admin")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> newAdmin(@RequestBody User user) {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(ADMIN);
+            user.setRole(ROLE_ADMIN);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {

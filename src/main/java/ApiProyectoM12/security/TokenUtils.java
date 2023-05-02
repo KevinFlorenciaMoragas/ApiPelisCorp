@@ -24,6 +24,7 @@ public class TokenUtils {
                 .setSubject(email)
                 .setExpiration(expirationDate)
                 .addClaims(extra)
+                //.claim("roles", roles)
                 .signWith(SignatureAlgorithm.HS256,ACCESS_TOKEN_SECRET.getBytes())
                 .compact();
     }

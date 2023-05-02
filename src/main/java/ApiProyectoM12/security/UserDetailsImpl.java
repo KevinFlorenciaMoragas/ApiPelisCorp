@@ -23,7 +23,9 @@ public class UserDetailsImpl implements UserDetails {
         System.out.println("Contraseña " + user.getPassword());
         return user.getPassword();
     }
-
+    public Role getRole() {
+        return user.getRole();
+    }
     @Override
     public String getUsername() {
         return user.getUsername();

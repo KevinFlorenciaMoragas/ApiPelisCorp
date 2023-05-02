@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,10 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 
+//import static ApiProyectoM12.modelo.Role.ADMIN;
+
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity
 public class WebSecurityConfig  {
 
     private final UserDetailsService userDetailsService;
@@ -30,13 +33,19 @@ public class WebSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
-
         filter.setAuthenticationManager(authenticationManager);
         filter.setFilterProcessesUrl("/login2");
-/*        return http
+    return http
+                .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .anyRequest()
+                //.requestMatchers(HttpMethod.POST, "/login2").permitAll()
+                .requestMatchers(HttpMethod.GET, "/**")
+                //.hasRole("ADMIN")
+                .authenticated()
+                .requestMatchers(HttpMethod.POST, "/user/**")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/admin/**")
                 .permitAll()
                 .and()
                 .sessionManagement()
@@ -44,7 +53,8 @@ public class WebSecurityConfig  {
                 .and()
                 .addFilter(filter)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();*/
+                .build();
+    /*
         return http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
                 authorizeRequests().requestMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.POST, "/user/**").hasAnyRole("ADMIN", "USER")
@@ -55,13 +65,16 @@ public class WebSecurityConfig  {
                 authorizeRequests().anyRequest().authenticated().and().
                 addFilter(filter).addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class).
                 csrf().disable().build();
+    */
     }
+
 
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder())
+
                 .and()
                 .build();
     }
