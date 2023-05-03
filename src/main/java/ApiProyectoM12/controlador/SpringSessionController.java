@@ -29,7 +29,7 @@ public class SpringSessionController {
                 System.out.println("Usuario correcto");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", user.getUsername());
-                session.setAttribute("rol", user.getRole());
+              //  session.setAttribute("rol", user.getRole());
                 System.out.println(session.getAttribute("username"));
                 return ResponseEntity.ok(userExist);
             } else {

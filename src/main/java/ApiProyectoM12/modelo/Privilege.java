@@ -12,11 +12,14 @@ import java.util.Collection;
 @NoArgsConstructor
 @Entity
 
-public class Privileges {
+public class Privilege {
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
     @ManyToMany(mappedBy = "privileges")
     private Collection<UserRol> userRols;
+    public Privilege(String name) {
+        this.name = name;
+    }
 }

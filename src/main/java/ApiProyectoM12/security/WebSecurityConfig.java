@@ -35,14 +35,13 @@ public class WebSecurityConfig  {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
         filter.setAuthenticationManager(authenticationManager);
         filter.setFilterProcessesUrl("/login2");
-    return http
+    /*return http
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
                 //.requestMatchers(HttpMethod.POST, "/login2").permitAll()
-                .requestMatchers(HttpMethod.GET, "/**")
-                //.hasRole("ADMIN")
-                .authenticated()
+                .requestMatchers(HttpMethod.GET, "/user").authenticated()
+            //.hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/user/**")
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/admin/**")
@@ -54,18 +53,23 @@ public class WebSecurityConfig  {
                 .addFilter(filter)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-    /*
-        return http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-                authorizeRequests().requestMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.POST, "/user/**").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.POST, "/movies/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/routeB/**").hasRole("ADMIN").and().
-                requestCache().requestCache(new NullRequestCache()).and().
-                httpBasic().and().
-                authorizeRequests().anyRequest().authenticated().and().
-                addFilter(filter).addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class).
-                csrf().disable().build();
-    */
+
+     */
+        return http
+                .csrf().disable()
+                .authorizeRequests()
+                .requestMatchers("/user").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilter(filter)
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+
     }
 
 

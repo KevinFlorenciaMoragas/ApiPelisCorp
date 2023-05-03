@@ -22,7 +22,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/user")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+ //   @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> listUser() {
         return userService.listUser();
     }
@@ -43,7 +43,7 @@ public class UserController {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(ROLE_USER);
+           // user.setRole(ROLE_USER);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class UserController {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(ROLE_ADMIN);
+          //  user.setRole(ROLE_ADMIN);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class UserController {
             userExist.setUsername(user.getUsername());
             userExist.setPassword(user.getPassword());
             userExist.setEmail(user.getEmail());
-            userExist.setRole(user.getRole());
+          //  userExist.setRole(user.getRole());
             userExist.setUserReviews(user.getUserReviews());
             userExist.setFavorites(user.getFavorites());
             userService.saveUser(userExist);

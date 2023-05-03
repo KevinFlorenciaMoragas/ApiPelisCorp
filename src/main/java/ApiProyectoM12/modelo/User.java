@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
@@ -19,13 +20,21 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
+    /*
     @Enumerated(EnumType.STRING)
     private Role role;
+    */
     /*
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userRol_id")
-   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private UserRol userRol;*/
+    @ManyToMany
+    @JoinTable(
+        name = "user_rol",
+        joinColumns = @JoinColumn(
+                name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(
+                name = "rol_id", referencedColumnName = "id"))
+    private Collection<UserRol> userRoles;
+
+     */
     @OneToMany(mappedBy = "user")
     Set<Favorite> favorites;
     @OneToMany(mappedBy = "user")

@@ -17,8 +17,8 @@ public class UserRol {
     @Column(name = "rol", nullable = false)
     private String rol;
 
-   // @OneToMany( cascade = CascadeType.ALL,mappedBy = "userrol")
-   // Set<User> users;
+   @ManyToMany( cascade = CascadeType.ALL,mappedBy = "userrol")
+    private Collection<User> users;
     @ManyToMany
     @JoinTable(
         name = "roles_privileges",
@@ -27,6 +27,9 @@ public class UserRol {
          inverseJoinColumns = @JoinColumn(
                  name = "privilege_id", referencedColumnName = "id")
                )
-       private Collection<Privileges> privileges;
+       private Collection<Privilege> privileges;
+    public UserRol(String rol) {
+        this.rol = rol;
+    }
    }
 
