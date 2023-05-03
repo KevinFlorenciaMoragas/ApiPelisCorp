@@ -8,7 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -19,12 +18,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 
-//import static ApiProyectoM12.modelo.Role.ADMIN;
-
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig  {
 
     private final UserDetailsService userDetailsService;
@@ -33,6 +30,7 @@ public class WebSecurityConfig  {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
+
         filter.setAuthenticationManager(authenticationManager);
         filter.setFilterProcessesUrl("/login2");
     /*return http
@@ -72,13 +70,11 @@ public class WebSecurityConfig  {
 
     }
 
-
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder())
-
                 .and()
                 .build();
     }

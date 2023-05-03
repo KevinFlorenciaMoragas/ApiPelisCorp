@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static ApiProyectoM12.modelo.Role.*;
+import static ApiProyectoM12.modelo.Role.ADMIN;
+import static ApiProyectoM12.modelo.Role.USER;
 
 @CrossOrigin
 @RestController
@@ -20,7 +21,6 @@ import static ApiProyectoM12.modelo.Role.*;
 public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @GetMapping("/user")
  //   @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> listUser() {
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-   // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> newUser(@RequestBody User user) {
         try {
             System.out.println(user);
@@ -51,7 +51,6 @@ public class UserController {
         }
     }
     @PostMapping("/admin")
-   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> newAdmin(@RequestBody User user) {
         try {
             System.out.println(user);

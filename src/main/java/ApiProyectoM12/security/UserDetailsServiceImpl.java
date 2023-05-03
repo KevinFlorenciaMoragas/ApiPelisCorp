@@ -1,6 +1,5 @@
 package ApiProyectoM12.security;
 
-import ApiProyectoM12.modelo.Role;
 import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.repositorio.UserRepository;
 import org.hibernate.sql.ast.tree.expression.Collation;
