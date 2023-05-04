@@ -16,10 +16,10 @@ public class UserRol {
     private Integer id;
     @Column(name = "rol", nullable = false)
     private String rol;
-
+/*
    @ManyToMany( cascade = CascadeType.ALL,mappedBy = "userrol")
     private Collection<User> users;
-    @ManyToMany
+  */  @ManyToMany
     @JoinTable(
         name = "roles_privileges",
        joinColumns = @JoinColumn(

@@ -1,6 +1,8 @@
 package ApiProyectoM12.security;
 
+import ApiProyectoM12.servicio.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +28,13 @@ public class WebSecurityConfig  {
 
     private final UserDetailsService userDetailsService;
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
+    /*@Autowired
+    private UserService userDetailsImpl;
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsImpl).passwordEncoder(passwordEncoder());
+    }*/
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
@@ -56,7 +64,7 @@ public class WebSecurityConfig  {
         return http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/user").hasRole("ADMIN")
+                .requestMatchers("/user/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

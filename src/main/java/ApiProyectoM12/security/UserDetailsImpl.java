@@ -3,9 +3,12 @@ package ApiProyectoM12.security;
 import ApiProyectoM12.modelo.Role;
 import ApiProyectoM12.modelo.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,12 +19,12 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
 
     private final User user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> list = new ArrayList<>();
             System.out.println(user.getUsername());
-            if(user.getUsername().equals("admin")){
-                System.out.println("Es admin");
+            if(user.getUsername().equals("ADMIN")){
                 list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 System.out.println(list);
             }

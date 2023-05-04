@@ -20,10 +20,10 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
-    /*
-    @Enumerated(EnumType.STRING)
+
+   @Enumerated(EnumType.STRING)
     private Role role;
-    */
+
     /*
     @ManyToMany
     @JoinTable(
