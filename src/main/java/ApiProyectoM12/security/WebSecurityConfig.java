@@ -63,9 +63,11 @@ public class WebSecurityConfig  {
      */
         return http
                 .csrf().disable()
+                .cors().disable()
+
                 .authorizeRequests()
                 .requestMatchers("/user/**").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .httpBasic()
                 .and()
@@ -92,6 +94,6 @@ public class WebSecurityConfig  {
     }
 
     public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("admin"));
+        System.out.println(new BCryptPasswordEncoder().encode("user"));
     }
 }

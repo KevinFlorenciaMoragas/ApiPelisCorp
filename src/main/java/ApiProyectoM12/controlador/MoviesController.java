@@ -23,13 +23,12 @@ public class MoviesController {
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<Movies> getMovieById(@RequestParam Integer id) {
+    public Movies getMovieById(@PathVariable Integer id) {
         try {
-
-            Movies movie = moviesService.findMovieById(id);
-            return ResponseEntity.ok(movie);
+            Movies movie = moviesService.findMovieAllDataById(id);
+            return movie;
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
     }
     @GetMapping("/movies/topDesc")

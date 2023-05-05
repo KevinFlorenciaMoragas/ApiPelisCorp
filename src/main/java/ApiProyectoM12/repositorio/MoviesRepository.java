@@ -17,5 +17,8 @@ public interface MoviesRepository extends JpaRepository<Movies,Integer> {
     List<Movies> findMoviesByReleaseDate(Date releaseDate);*/
     @Query("select m.duration, m.movieName from Movies m Where m.movieName = ?1")
     Movies findMoviesByMovieName(String movieName);
+    @Query ("SELECT m.*, d.*,screen.*,g.*,a.* FROM Movies m LEFT JOIN movie_director r_md ON m.id = r_md.id_movie LEFT JOIN director d ON d.id = r_md.id_movie LEFT JOIN movie_actor r_ma ON m.id = r_ma.id_movie LEFT JOIN actors a ON r_ma.id_actor = a.id LEFT JOIN movie_screenwritter r_ms ON r_ms.id_movie = m.id LEFT JOIN screenwriter screen ON screen.id = r_ms.id_screenwritter LEFT JOIN movie_genre r_mg ON r_mg.id_movie = m.id LEFT JOIN genre g ON g.id = r_mg.id_genre WHERE m.id = ?1")
+    Movies findMoviesAllDataById(Integer id);
+
 }
 
