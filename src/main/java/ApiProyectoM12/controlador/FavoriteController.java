@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.Favorite;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class FavoriteController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{user_id}/favorite")
+    public List<Movies> findFavoritesByUsersId(@PathVariable Integer user_id) {
+        return favoriteService.findFavoritesByUsersId(user_id);
     }
 
     @PostMapping("/favorite")

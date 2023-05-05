@@ -3,11 +3,13 @@ package ApiProyectoM12.servicio;
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.repositorio.MoviesRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -22,5 +24,5 @@ public class MoviesService {
     public List<Movies> findTopByOrderByScoreAsc(){return moviesRepository.findTopByOrderByScoreAsc();}
    // public List<Movies> findMoviesByReleaseDate(Date releaseDate){return moviesRepository.findMoviesByReleaseDate(releaseDate);}
     public Movies findMoviesByMovieName(String movieName){return moviesRepository.findMoviesByMovieName(movieName);}
-
+    public Movies findMoviesAllDataById(Integer id){return moviesRepository.findMoviesAllDataById(id);}
 }

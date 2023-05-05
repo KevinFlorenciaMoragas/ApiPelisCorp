@@ -3,6 +3,7 @@ package ApiProyectoM12.controlador;
 import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.servicio.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,14 +30,19 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+    @Modifying
+    @PostMapping("/update/{password}/{username}")
+    public ResponseEntity<?> updatePassword(@PathVariable String username, @PathVariable String password) {
+        try {
+            int user = userService.updatePassword(username, password);
+            if(userService.updatePassword(username, password) > 0){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
 
-    @PostMapping("/updatePassword")
-    public ResponseEntity<?> updatePassword(@RequestBody User user,@RequestParam String newPassword) {
-        boolean actualizacionExitosa = userService.updatePassword(user.getUsername(), user.getPassword(), newPassword);
-        if (actualizacionExitosa) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.badRequest().body("La contraseña actual es incorrecta.");
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @PostMapping("/user")

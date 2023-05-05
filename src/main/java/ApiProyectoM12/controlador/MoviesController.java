@@ -22,10 +22,19 @@ public class MoviesController {
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<Movies> getMovieById(@RequestParam Integer id) {
+    public ResponseEntity<Movies> getMovieById(@PathVariable Integer id) {
         try {
-
             Movies movie = moviesService.findMovieById(id);
+            return ResponseEntity.ok(movie);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/moviesAllData/{id}")
+    public ResponseEntity<Movies> findMoviesAllDataById(@PathVariable Integer id) {
+        try {
+            Movies movie = moviesService.findMoviesAllDataById(id);
             return ResponseEntity.ok(movie);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
@@ -37,17 +46,18 @@ public class MoviesController {
             //return ResponseEntity.ok(movie);
     }
 
-
     @GetMapping("/movies/topAsc")
     public List<Movies> getTopMovieAsc() {
         return moviesService.findTopByOrderByScoreAsc();
         //return ResponseEntity.ok(movie);
     }
+
    /* @GetMapping("/movies/{releaseDate}")
     public List<Movies> getMovieByReleaseDate(@PathVariable Date releaseDate) {
         return moviesService.findMoviesByReleaseDate(releaseDate);
         //return ResponseEntity.ok(movie);
     }*/
+
     @GetMapping("/movies")
     public Movies getMovieByMovieName(@RequestBody Movies movie) {
         System.out.println(movie.getMovieName());
@@ -77,11 +87,11 @@ public class MoviesController {
             movieExists.setIncome(movies.getIncome());
             movieExists.setDuration(movies.getDuration());
             movieExists.setMovieActors(movies.getMovieActors());
-            movieExists.setMovieGenres(movies.getMovieGenres());
+            /*movieExists.setMovieGenres(movies.getMovieGenres());
             movieExists.setMovieDirectors(movies.getMovieDirectors());
             movieExists.setMovieAwards(movies.getMovieAwards());
             movieExists.setMovieScreenwritters(movies.getMovieScreenwritters());
-            movieExists.setFavorites(movies.getFavorites());
+            movieExists.setFavorites(movies.getFavorites());*/
             moviesService.saveMovie(movieExists);
             return new ResponseEntity<Movies>(movieExists, HttpStatus.OK);
         } catch (Exception e) {
