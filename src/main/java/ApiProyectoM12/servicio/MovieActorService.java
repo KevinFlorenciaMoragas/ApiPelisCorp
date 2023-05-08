@@ -2,18 +2,27 @@ package ApiProyectoM12.servicio;
 
 import ApiProyectoM12.modelo.MovieActor;
 import ApiProyectoM12.modelo.Movies;
+import ApiProyectoM12.modelo.Actors;
 import ApiProyectoM12.repositorio.MovieActorRepository;
 import ApiProyectoM12.repositorio.MoviesRepository;
+import ApiProyectoM12.repositorio.ActorsRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class MovieActorService {
     @Autowired
     private MovieActorRepository movieActorRepository;
+
+    private MoviesRepository moviesRepository;
+
+    private ActorsRepository actorsRepository;
 
     public List<MovieActor> listMovieActor(){return movieActorRepository.findAll();}
     public void saveMovieActor(MovieActor movieActor){movieActorRepository.save(movieActor);}

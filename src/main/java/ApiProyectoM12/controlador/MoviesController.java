@@ -23,12 +23,8 @@ public class MoviesController {
 
     @GetMapping("/movies/{id}")
     public ResponseEntity<Movies> getMovieById(@PathVariable Integer id) {
-        try {
-            Movies movie = moviesService.findMovieById(id);
-            return ResponseEntity.ok(movie);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+        Movies movie = moviesService.findMovieById(id);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
     @GetMapping("/moviesAllData/{id}")
@@ -86,8 +82,8 @@ public class MoviesController {
             movieExists.setReleaseDate(movies.getReleaseDate());
             movieExists.setIncome(movies.getIncome());
             movieExists.setDuration(movies.getDuration());
-            movieExists.setMovieActors(movies.getMovieActors());
-            /*movieExists.setMovieGenres(movies.getMovieGenres());
+            /*movieExists.setMovieActors(movies.getMovieActors());
+            movieExists.setMovieGenres(movies.getMovieGenres());
             movieExists.setMovieDirectors(movies.getMovieDirectors());
             movieExists.setMovieAwards(movies.getMovieAwards());
             movieExists.setMovieScreenwritters(movies.getMovieScreenwritters());
@@ -100,8 +96,13 @@ public class MoviesController {
     }
 
     @DeleteMapping("/movies/{id}")
-
     public void deleteMovies(@PathVariable Integer id) {
         moviesService.deleteMovie(id);
+    }
+
+    @PostMapping("/{userId}/roles/{roleId}")
+    public ResponseEntity<Movies> addRoleToUser(@PathVariable Integer userId, @PathVariable Integer roleId) {
+        Movies user = moviesService.addRoleToUser(userId, roleId);
+        return ResponseEntity.ok(user);
     }
 }

@@ -1,7 +1,9 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.Actors;
+import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.ActorsService;
+import ApiProyectoM12.servicio.MoviesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActorsController {
     private final ActorsService actorsService;
+    private final MoviesService moviesService;
 
     @GetMapping("/allActors")
     public List<Actors> listActors() {
@@ -56,8 +59,8 @@ public class ActorsController {
             Actors actorsExist = actorsService.findActorsById(id);
             actorsExist.setName(actors.getName());
             actorsExist.setLastName(actors.getLastName());
-            actorsExist.setActorAwards(actors.getActorAwards());
-            actorsExist.setMovieActors(actors.getMovieActors());
+            /*actorsExist.setActorAwards(actors.getActorAwards());
+            actorsExist.setMovieActors(actors.getMovieActors());*/
             actorsService.saveActors(actorsExist);
             return new ResponseEntity<Actors>(actorsExist, HttpStatus.OK);
 
@@ -67,8 +70,8 @@ public class ActorsController {
     }
 
     @DeleteMapping("/actors/{id}")
-
     public void deleteActors(@PathVariable Integer id) {
         actorsService.deleteActors(id);
     }
+
 }

@@ -1,14 +1,12 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -19,7 +17,6 @@ public class Movies {
     @Id
     @GeneratedValue
     private Integer id;
-
     @Column(name = "movieName", length = 100)
     private String movieName;
     @Column(name = "release_date")
@@ -32,9 +29,12 @@ public class Movies {
     private Long income;
     @Column(name = "score")
     private Double score;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "moviesActors",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_actors", nullable = false) })
+    private List<Actors> actors;
 
-    @OneToMany(mappedBy = "movies")
-    private Set<MovieActor> movieActors;
 }
 
     /*@OneToMany(mappedBy = "movies")

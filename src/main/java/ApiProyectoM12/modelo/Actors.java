@@ -1,11 +1,15 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,9 +25,8 @@ public class Actors {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
-
-    @OneToMany(mappedBy = "actors")
-    Set<MovieActor> movieActors;
-    @OneToMany(mappedBy = "actors")
-    Set<ActorAward>actorAwards;
+    @ManyToMany(mappedBy = "actors")
+    private Set<Movies> movies = new HashSet<>();
+    /*@OneToMany(mappedBy = "actors")
+    Set<ActorAward>actorAwards;*/
 }

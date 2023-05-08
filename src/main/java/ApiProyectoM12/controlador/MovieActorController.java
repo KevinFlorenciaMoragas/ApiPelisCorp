@@ -50,7 +50,7 @@ public class MovieActorController {
         try {
             System.out.println(movieActor);
             movieActorService.saveMovieActor(movieActor);
-            return null;
+            return new ResponseEntity<MovieActor>(movieActor, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
