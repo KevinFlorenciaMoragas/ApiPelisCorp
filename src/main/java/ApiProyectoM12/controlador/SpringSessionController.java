@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SpringSessionController {
     private final UserRepository userRepository;
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request, Model model) {
         System.out.println("Entramos en login");
 

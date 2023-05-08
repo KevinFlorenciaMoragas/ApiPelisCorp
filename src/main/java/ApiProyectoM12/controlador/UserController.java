@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> newUser(@RequestBody User user) {
         try {
             System.out.println(user);

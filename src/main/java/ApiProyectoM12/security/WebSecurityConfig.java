@@ -40,7 +40,7 @@ public class WebSecurityConfig  {
         JWTAuthenticationFilter filter = new JWTAuthenticationFilter();
 
         filter.setAuthenticationManager(authenticationManager);
-        filter.setFilterProcessesUrl("/login2");
+        filter.setFilterProcessesUrl("/login");
     /*return http
                 .cors().and()
                 .csrf().disable()
@@ -63,11 +63,14 @@ public class WebSecurityConfig  {
      */
         return http
                 .csrf().disable()
-                .cors().disable()
-
+                .cors().and()
                 .authorizeRequests()
-                .requestMatchers("/user/**").hasAuthority("ADMIN")
-                .anyRequest().permitAll()
+                .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.POST).authenticated()
+                .requestMatchers(HttpMethod.PUT).authenticated()
+                .requestMatchers(HttpMethod.DELETE).authenticated()
                 .and()
                 .httpBasic()
                 .and()
