@@ -89,8 +89,8 @@ public class MoviesController {
             movieExists.setReleaseDate(movies.getReleaseDate());
             movieExists.setIncome(movies.getIncome());
             movieExists.setDuration(movies.getDuration());
-            movieExists.setMovieActors(movies.getMovieActors());
-            /*movieExists.setMovieGenres(movies.getMovieGenres());
+            /*movieExists.setMovieActors(movies.getMovieActors());
+            movieExists.setMovieGenres(movies.getMovieGenres());
             movieExists.setMovieDirectors(movies.getMovieDirectors());
             movieExists.setMovieAwards(movies.getMovieAwards());
             movieExists.setMovieScreenwritters(movies.getMovieScreenwritters());

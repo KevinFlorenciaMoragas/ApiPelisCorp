@@ -1,5 +1,6 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +34,41 @@ public class Movies {
     @Column(name = "score")
     private Double score;
 
-    @OneToMany(mappedBy = "movies")
-    private Set<MovieActor> movieActors;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesActors",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_actors", nullable = false) })
+    private List<Actors> actors;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesGenres",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_genre", nullable = false) })
+    private List<Genre> genre;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesDirectors",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_director", nullable = false) })
+    private List<Director> director;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesScreenwritters",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_screenwritter", nullable = false) })
+    private List<Screenwritter> screenwritter;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesFavorites",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_favorite", nullable = false) })
+    private List<Favorite> favorite;
+
 }
 
     /*@OneToMany(mappedBy = "movies")
