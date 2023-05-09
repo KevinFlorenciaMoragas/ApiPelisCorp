@@ -1,11 +1,13 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
@@ -23,21 +25,11 @@ public class User {
 
    @Enumerated(EnumType.STRING)
     private Role role;
-
-    /*
-    @ManyToMany
-    @JoinTable(
-        name = "user_rol",
-        joinColumns = @JoinColumn(
-                name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(
-                name = "rol_id", referencedColumnName = "id"))
-    private Collection<UserRol> userRoles;
-
-     */
-    @OneToMany(mappedBy = "user")
-    Set<Favorite> favorites;
-    @OneToMany(mappedBy = "user")
-    Set<UserReview> userReviews;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "userReviews",
+            joinColumns = { @JoinColumn(name = "id_user") },
+            inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
+    private List<Reviews> reviews;
 
 }

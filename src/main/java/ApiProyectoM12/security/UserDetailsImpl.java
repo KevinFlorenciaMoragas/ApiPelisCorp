@@ -24,7 +24,7 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> list = new ArrayList<>();
             System.out.println(user.getUsername());
-            if(user.getUsername().equals("ADMIN")){
+            if(user.getUsername().equals("admin")){
                 list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 System.out.println(list);
             }

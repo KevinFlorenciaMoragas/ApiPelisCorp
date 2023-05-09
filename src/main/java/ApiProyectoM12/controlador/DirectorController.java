@@ -46,7 +46,6 @@ public class DirectorController {
             Director directorExist = directorService.findDirectorById(id);
             directorExist.setName(director.getName());
             directorExist.setLastName(director.getLastName());
-            directorExist.setMovieDirectors(director.getMovieDirectors());
             directorService.saveDirector(directorExist);
             return new ResponseEntity<Director>(directorExist, HttpStatus.OK);
 

@@ -20,8 +20,5 @@ public class Reviews {
     private String text;
     @Column(name = "average_rating")
     private double averageRating;
-    @OneToMany(mappedBy = "reviews")
-    Set<UserReview> userReviews;
-    @OneToMany(mappedBy = "reviews")
-    Set<MovieReview>movieReviews;
+
 }

@@ -17,7 +17,6 @@ public class Genre {
     private Integer id;
     @Column(name="genre", length = 100)
     private String genre;
-    @OneToMany(mappedBy = "genre")
-    Set<MovieGenre> movieGenres;
+
 
 }

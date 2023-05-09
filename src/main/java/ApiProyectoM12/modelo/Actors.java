@@ -20,8 +20,5 @@ public class Actors {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
-    @OneToMany(mappedBy = "actors")
-    Set<MovieActor> movieActors;
-    @OneToMany(mappedBy = "actors")
-    Set<ActorAward>actorAwards;
+
 }

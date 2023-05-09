@@ -46,8 +46,7 @@ public class ReviewsController {
         try {
             Reviews reviewsExist = reviewsService.findReviewById(id);
             reviewsExist.setText(reviews.getText());
-            reviewsExist.setUserReviews(reviews.getUserReviews());
-            reviewsExist.setMovieReviews(reviews.getMovieReviews());
+
             reviewsExist.setAverageRating(reviews.getAverageRating());
             reviewsService.saveReview(reviewsExist);
             return new ResponseEntity<Reviews>(reviewsExist, HttpStatus.OK);

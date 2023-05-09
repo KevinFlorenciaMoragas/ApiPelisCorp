@@ -56,8 +56,7 @@ public class ActorsController {
             Actors actorsExist = actorsService.findActorsById(id);
             actorsExist.setName(actors.getName());
             actorsExist.setLastName(actors.getLastName());
-            actorsExist.setActorAwards(actors.getActorAwards());
-            actorsExist.setMovieActors(actors.getMovieActors());
+
             actorsService.saveActors(actorsExist);
             return new ResponseEntity<Actors>(actorsExist, HttpStatus.OK);
 

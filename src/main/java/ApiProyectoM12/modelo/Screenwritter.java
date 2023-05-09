@@ -19,6 +19,5 @@ public class Screenwritter {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
-    @OneToMany(mappedBy = "screenwritter")
-    Set<MovieScreenwritter> movieScreenwritters;
+
 }

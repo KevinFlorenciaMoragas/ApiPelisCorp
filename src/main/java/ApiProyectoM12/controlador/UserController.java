@@ -70,9 +70,6 @@ public class UserController {
             userExist.setUsername(user.getUsername());
             userExist.setPassword(user.getPassword());
             userExist.setEmail(user.getEmail());
-          //  userExist.setRole(user.getRole());
-            userExist.setUserReviews(user.getUserReviews());
-            userExist.setFavorites(user.getFavorites());
             userService.saveUser(userExist);
             return new ResponseEntity<User>(userExist, HttpStatus.OK);
 
