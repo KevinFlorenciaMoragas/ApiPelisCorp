@@ -40,8 +40,4 @@ public class MoviesService {
         }
     }
 
-    public Optional<Movies> findMoviesById(Integer id_movie) {
-        return moviesRepository.findById(id_movie);
-    }
-
 }
