@@ -25,4 +25,8 @@ public class MoviesService {
    // public List<Movies> findMoviesByReleaseDate(Date releaseDate){return moviesRepository.findMoviesByReleaseDate(releaseDate);}
     public Movies findMoviesByMovieName(String movieName){return moviesRepository.findMoviesByMovieName(movieName);}
     public Movies findMoviesAllDataById(Integer id){return moviesRepository.findMoviesAllDataById(id);}
+
+    public Optional<Movies> findMoviesById(Integer id_movie) {
+        return moviesRepository.findById(id_movie);
+    }
 }

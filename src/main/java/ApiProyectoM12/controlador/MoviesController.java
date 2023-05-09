@@ -1,7 +1,9 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.AllMovie;
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MoviesService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -103,5 +106,17 @@ public class MoviesController {
 
     public void deleteMovies(@PathVariable Integer id) {
         moviesService.deleteMovie(id);
+    }
+
+    @GetMapping("/movies/{id_movie}/actors")
+    public ResponseEntity<AllMovie> getRolesByUserId(@PathVariable Integer id_movie){
+        Optional<Movies> optionalMovie = moviesService.findMoviesById(id_movie);
+        if (optionalMovie.isPresent()) {
+            Movies movie = optionalMovie.get();
+            AllMovie response = new AllMovie(movie);
+            return ResponseEntity.ok(response);
+        } else {
+            throw new EntityNotFoundException("Movie with ID " + id_movie + " not found");
+        }
     }
 }
