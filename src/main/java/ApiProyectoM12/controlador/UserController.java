@@ -43,7 +43,7 @@ public class UserController {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-           // user.setRole(ROLE_USER);
+            user.setRole(USER);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {

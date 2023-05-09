@@ -67,7 +67,7 @@ public class WebSecurityConfig  {
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                //.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST).authenticated()
                 .requestMatchers(HttpMethod.PUT).authenticated()
                 .requestMatchers(HttpMethod.DELETE).authenticated()
