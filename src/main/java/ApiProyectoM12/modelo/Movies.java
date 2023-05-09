@@ -37,19 +37,46 @@ public class Movies {
             inverseJoinColumns = { @JoinColumn(name = "id_actors", nullable = false) })
     private List<Actors> actors;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesGenres",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_genre", nullable = false) })
+    private List<Genre> genre;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesDirectors",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_director", nullable = false) })
+    private List<Director> director;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesScreenwritters",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_screenwritter", nullable = false) })
+    private List<Screenwritter> screenwritter;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesAwards",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_awards", nullable = false) })
+    private List<Awards> awards;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesScreenwritters",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_awards", nullable = false) })
+    private List<Favorite> favorite;
 }
 
     /*@OneToMany(mappedBy = "movies")
-    Set<Favorite>favorites= new HashSet<>();
-    @OneToMany(mappedBy = "movies")
-    Set<MovieGenre>movieGenres= new HashSet<>();
-    @OneToMany(mappedBy = "movies")
-    Set<MovieDirector>movieDirectors= new HashSet<>();*/
+    Set<Favorite>favorites= new HashSet<>();*/
 
     /*@OneToMany(mappedBy = "movies")
-    Set<MovieAward>movieAwards= new HashSet<>();
-    @OneToMany(mappedBy = "movies")
-    Set<MovieScreenwritter>movieScreenwritters= new HashSet<>();*/
+    Set<MovieAward>movieAwards= new HashSet<>();*/
 
 
