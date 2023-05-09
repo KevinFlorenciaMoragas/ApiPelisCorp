@@ -1,12 +1,10 @@
 package ApiProyectoM12.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,9 +20,8 @@ public class Awards {
     private String name;
     @Column(name = "festival", length = 200)
     private String festival;
-    @ManyToMany(mappedBy = "actors")
-    @JsonBackReference
-    private Set<Movies> movies = new HashSet<>();
+    @OneToMany(mappedBy = "awards")
+    Set<MovieAward> movieAwards;
     @OneToMany(mappedBy = "awards")
     Set<ActorAward>actorAwards;
 }

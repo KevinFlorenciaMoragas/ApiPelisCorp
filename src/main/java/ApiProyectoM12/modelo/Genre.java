@@ -22,4 +22,5 @@ public class Genre {
     @ManyToMany(mappedBy = "genre")
     @JsonBackReference
     private Set<Movies> movies = new HashSet<>();
+
 }
