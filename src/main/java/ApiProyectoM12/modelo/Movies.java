@@ -1,6 +1,7 @@
 package ApiProyectoM12.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,10 +31,12 @@ public class Movies {
     @Column(name = "score")
     private Double score;
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinTable(name = "moviesActors",
             joinColumns = { @JoinColumn(name = "id_movies") },
             inverseJoinColumns = { @JoinColumn(name = "id_actors", nullable = false) })
     private List<Actors> actors;
+
 
 }
 

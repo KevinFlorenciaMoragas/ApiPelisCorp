@@ -30,14 +30,13 @@ public class MoviesService {
     public Movies findMoviesByMovieName(String movieName){return moviesRepository.findMoviesByMovieName(movieName);}
     public Movies findMoviesAllDataById(Integer id){return moviesRepository.findMoviesAllDataById(id);}
 
-    public void addRoleToUser(Integer id_movie, Integer id_actor) {
-        Optional<Movies> optionalMovies = moviesRepository.findById(id_movie);
-        Optional<Actors> optionalActors = actorsRepository.findById(id_actor);
-        if (optionalMovies.isPresent() && optionalActors.isPresent()) {
-            Movies movie = optionalMovies.get();
-            Actors actor = optionalActors.get();
-            movie.getActors().add(actor);
-            moviesRepository.save(movie);
+    public List<Actors> getRolesByUserId(Integer id_movie) {
+        Optional<Movies> optionalMovie = moviesRepository.findById(id_movie);
+        if (optionalMovie.isPresent()) {
+            Movies movie = optionalMovie.get();
+            return movie.getActors();
+        } else {
+            throw new EntityNotFoundException("User with ID " + id_movie + " not found");
         }
     }
 

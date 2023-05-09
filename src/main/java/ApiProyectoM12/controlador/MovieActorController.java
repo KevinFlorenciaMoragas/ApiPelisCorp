@@ -1,19 +1,25 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.Actors;
 import ApiProyectoM12.modelo.MovieActor;
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MovieActorService;
+import ApiProyectoM12.servicio.MoviesService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
 public class MovieActorController {
     private final MovieActorService movieActorService;
+    private final MoviesService moviesService;
 
     @GetMapping("/movieActor")
     public List<MovieActor> listMovieActor() {
@@ -30,10 +36,10 @@ public class MovieActorController {
         }
     }
 
-    @GetMapping("/{actorId}/movieActor")
+    /*@GetMapping("/{actorId}/movieActor")
     public List<Movies> getMoviesByActor(@PathVariable Integer actorId) {
         return movieActorService.getMoviesByActor(actorId);
-    }
+    }*/
 
     @GetMapping("/{actorId}/moviesActorASC")
     public List<Movies> findMoviesByActorIdOrderByScoreAsc(@PathVariable Integer actorId) {
@@ -56,7 +62,7 @@ public class MovieActorController {
         }
     }
 
-    @PutMapping("/movieActor/{id}")
+    /*@PutMapping("/movieActor/{id}")
     public ResponseEntity<?> editMovieActor(@RequestBody MovieActor movieActor, @PathVariable Integer id) {
         try {
             MovieActor movieActorExist = movieActorService.findMovieActorById(id);
@@ -68,12 +74,24 @@ public class MovieActorController {
         } catch (Exception e) {
             return new ResponseEntity<MovieActor>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
     @DeleteMapping("/movieActor/{id}")
 
     public void deleteMovieActor(@PathVariable Integer id) {
         movieActorService.deleteMovieActor(id);
+    }
+
+    @GetMapping("/movies/{id_movie}/actors")
+    public ResponseEntity<MovieActor> getRolesByUserId(@PathVariable Integer id_movie) {
+        Movies movie = moviesService.findMovieById(id_movie);
+        if (movie != null) {
+            List<Actors> actors = movie.getActors();
+            MovieActor response = new MovieActor(movie, actors);
+            return ResponseEntity.ok(response);
+        } else {
+            throw new EntityNotFoundException("Movie with ID " + id_movie + " not found");
+        }
     }
 
 }

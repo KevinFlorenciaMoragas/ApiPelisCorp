@@ -1,5 +1,6 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -26,6 +27,7 @@ public class Actors {
     @Column(name = "lastName", length = 50)
     private String lastName;
     @ManyToMany(mappedBy = "actors")
+    @JsonBackReference
     private Set<Movies> movies = new HashSet<>();
     /*@OneToMany(mappedBy = "actors")
     Set<ActorAward>actorAwards;*/

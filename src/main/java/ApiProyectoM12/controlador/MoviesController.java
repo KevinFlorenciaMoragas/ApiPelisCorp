@@ -1,6 +1,8 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.modelo.Actors;
 import ApiProyectoM12.modelo.Movies;
+import ApiProyectoM12.servicio.ActorsService;
 import ApiProyectoM12.servicio.MoviesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MoviesController {
     private final MoviesService moviesService;
+    private final ActorsService actorsService;
 
     @GetMapping("/allMovies")
     public List<Movies> listFavorite() {
@@ -100,9 +103,9 @@ public class MoviesController {
         moviesService.deleteMovie(id);
     }
 
-    @PostMapping("/{userId}/roles/{roleId}")
-    public ResponseEntity<Movies> addRoleToUser(@PathVariable Integer userId, @PathVariable Integer roleId) {
-        Movies user = moviesService.addRoleToUser(userId, roleId);
-        return ResponseEntity.ok(user);
+    @GetMapping("/movies/{id_movie}/actors")
+    public ResponseEntity<List<Actors>> getRolesByUserId(@PathVariable Integer id_movie){
+        List<Actors> actors = moviesService.getRolesByUserId(id_movie);
+        return ResponseEntity.ok(actors);
     }
 }

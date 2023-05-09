@@ -1,30 +1,34 @@
 package ApiProyectoM12.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="movie_actor")
+
+import java.util.List;
+
+
 public class MovieActor {
-    @Id
-    @GeneratedValue
-    private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_movie")
-    private Movies movies;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_actor")
-    private Actors actors;
+    private Movies movie;
+    private List<Actors> actors;
 
+    public MovieActor(Movies movie, List<Actors> actors) {
+        this.movie = movie;
+        this.actors = actors;
+    }
 
+    public Movies getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movies movie) {
+        this.movie = movie;
+    }
+
+    public List<Actors> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actors> actors) {
+        this.actors = actors;
+    }
 }
