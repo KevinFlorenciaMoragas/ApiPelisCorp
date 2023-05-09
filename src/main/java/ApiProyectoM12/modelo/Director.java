@@ -20,6 +20,5 @@ public class Director {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
-    @OneToMany(mappedBy = "director")
-    Set<MovieDirector> movieDirectors;
+
 }

@@ -20,7 +20,6 @@ public class Movies {
     @Id
     @GeneratedValue
     private Integer id;
-
     @Column(name = "movieName", length = 100)
     private String movieName;
     @Column(name = "release_date")
@@ -69,18 +68,23 @@ public class Movies {
             inverseJoinColumns = { @JoinColumn(name = "id_favorite", nullable = false) })
     private List<Favorite> favorite;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesAwards2",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_award", nullable = false) })
+    private List<Awards> awards;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinTable(name = "moviesReviews2",
+            joinColumns = { @JoinColumn(name = "id_movies") },
+            inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
+    private List<Reviews> reviews;
+
+
 }
 
-    /*@OneToMany(mappedBy = "movies")
-    Set<Favorite>favorites= new HashSet<>();
-    @OneToMany(mappedBy = "movies")
-    Set<MovieGenre>movieGenres= new HashSet<>();
-    @OneToMany(mappedBy = "movies")
-    Set<MovieDirector>movieDirectors= new HashSet<>();*/
 
-    /*@OneToMany(mappedBy = "movies")
-    Set<MovieAward>movieAwards= new HashSet<>();
-    @OneToMany(mappedBy = "movies")
-    Set<MovieScreenwritter>movieScreenwritters= new HashSet<>();*/
 
 

@@ -20,8 +20,5 @@ public class Awards {
     private String name;
     @Column(name = "festival", length = 200)
     private String festival;
-    @OneToMany(mappedBy = "awards")
-    Set<MovieAward> movieAwards;
-    @OneToMany(mappedBy = "awards")
-    Set<ActorAward>actorAwards;
+
 }
