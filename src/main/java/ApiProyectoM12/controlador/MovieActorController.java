@@ -62,7 +62,7 @@ public class MovieActorController {
         }
     }
 
-    /*@PutMapping("/movieActor/{id}")
+    @PutMapping("/movieActor/{id}")
     public ResponseEntity<?> editMovieActor(@RequestBody MovieActor movieActor, @PathVariable Integer id) {
         try {
             MovieActor movieActorExist = movieActorService.findMovieActorById(id);
@@ -74,24 +74,12 @@ public class MovieActorController {
         } catch (Exception e) {
             return new ResponseEntity<MovieActor>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
 
     @DeleteMapping("/movieActor/{id}")
 
     public void deleteMovieActor(@PathVariable Integer id) {
         movieActorService.deleteMovieActor(id);
-    }
-
-    @GetMapping("/movies/{id_movie}/actors")
-    public ResponseEntity<MovieActor> getRolesByUserId(@PathVariable Integer id_movie) {
-        Movies movie = moviesService.findMovieById(id_movie);
-        if (movie != null) {
-            List<Actors> actors = movie.getActors();
-            MovieActor response = new MovieActor(movie, actors);
-            return ResponseEntity.ok(response);
-        } else {
-            throw new EntityNotFoundException("Movie with ID " + id_movie + " not found");
-        }
     }
 
 }

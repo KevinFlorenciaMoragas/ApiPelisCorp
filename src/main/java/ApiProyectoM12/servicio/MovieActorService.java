@@ -28,11 +28,11 @@ public class MovieActorService {
     public void saveMovieActor(MovieActor movieActor){movieActorRepository.save(movieActor);}
     public MovieActor findMovieActorById(Integer id){return movieActorRepository.findById(id).get();}
     public void deleteMovieActor(Integer id){movieActorRepository.deleteById(id);}
-    /*public List<Movies> getMoviesByActor(Integer actorId) {
+    public List<Movies> getMoviesByActor(Integer actorId) {
         List<MovieActor> movieActorList = movieActorRepository.findByActorsId(actorId);
         List<Movies> movies = movieActorList.stream().map(MovieActor::getMovies).collect(Collectors.toList());
         return movies;
-    }*/
+    }
 
     public List<Movies> findMoviesByActorIdOrderByScoreAsc(Integer directorId) {
         return movieActorRepository.findMoviesByActorIdOrderByScoreAsc(directorId);
