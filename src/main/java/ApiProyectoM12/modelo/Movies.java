@@ -1,5 +1,6 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,8 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Data
@@ -31,6 +33,11 @@ public class Movies {
     private Long income;
     @Column(name = "score")
     private Double score;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL)
+    private List<Poster> poster;
+    @Column(name = "trailer", length = 200)
+    private String trailer;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -65,7 +72,7 @@ public class Movies {
     @JoinTable(name = "moviesFavorites",
             joinColumns = { @JoinColumn(name = "id_movies") },
             inverseJoinColumns = { @JoinColumn(name = "id_user", nullable = false) })
-    private List<User> favourite;
+    private List<User> favorite;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonManagedReference

@@ -22,14 +22,9 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
-
+    @Column(name = "avatar", length = 100)
+    private String avatar;
    @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinTable(name = "userReviews",
-            joinColumns = { @JoinColumn(name = "id_user") },
-            inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
-    private List<Reviews> reviews;
 
 }

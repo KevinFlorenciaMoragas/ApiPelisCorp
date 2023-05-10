@@ -20,5 +20,6 @@ public class Director {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
-
+    @Column(name = "photo")
+    private String photo;
 }
