@@ -107,5 +107,9 @@ public class MoviesController {
             throw new EntityNotFoundException("Movie with ID " + id_movie + " not found");
         }
     }
-
+    @GetMapping("/movies/genre/{genre}")
+    public List<Movies> getMovieByGenre(@PathVariable String genre) {
+        return moviesService.findMoviesByGenre(genre);
+        //return ResponseEntity.ok(movie);
+    }
 }
