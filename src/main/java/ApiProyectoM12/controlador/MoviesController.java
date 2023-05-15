@@ -4,6 +4,7 @@ import ApiProyectoM12.modelo.AllMovie;
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MoviesService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,27 +40,22 @@ public class MoviesController {
      */
     @GetMapping("/movies/topDesc")
     public List<Movies> getTopMovieDesc() {
-            return moviesService.findTopByOrderByScoreDesc();
+        List<Movies> movies = moviesService.findTopByOrderByScoreDesc();
+            return movies;
             //return ResponseEntity.ok(movie);
     }
 
 
     @GetMapping("/movies/topAsc")
     public List<Movies> getTopMovieAsc() {
-        return moviesService.findTopByOrderByScoreAsc();
-        //return ResponseEntity.ok(movie);
+        List<Movies> movies = moviesService.findTopByOrderByScoreAsc();
+        return movies;
     }
-   /* @GetMapping("/movies/{releaseDate}")
-    public List<Movies> getMovieByReleaseDate(@PathVariable Date releaseDate) {
-        return moviesService.findMoviesByReleaseDate(releaseDate);
-        //return ResponseEntity.ok(movie);
-    }*/
     @GetMapping("/movies?name={movieName}")
     public Movies getMovieByMovieName(@RequestBody Movies movie) {
         System.out.println(movie.getMovieName());
         movie = moviesService.findMoviesByMovieName(movie.getMovieName());
         return movie;
-        //return ResponseEntity.ok(movie);
     }
 
     @PostMapping("/movies")

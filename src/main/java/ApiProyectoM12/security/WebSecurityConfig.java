@@ -66,6 +66,7 @@ public class WebSecurityConfig  {
                 .cors().and()
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
                 //.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST).authenticated()

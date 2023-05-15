@@ -19,8 +19,8 @@ public class MoviesService {
     public Movies findMovieById(Integer id){return moviesRepository.findById(id).get();}
     public Movies findMovieAllDataById(Integer id){return moviesRepository.findMoviesAllDataById(id);}
     public void deleteMovie(Integer id){moviesRepository.deleteById(id);}
-    public List<Movies> findTopByOrderByScoreDesc(){return moviesRepository.findTopByOrderByScoreDesc();}
-    public List<Movies> findTopByOrderByScoreAsc(){return moviesRepository.findTopByOrderByScoreAsc();}
+    public List<Movies> findTopByOrderByScoreDesc(){return moviesRepository.findByOrderByScoreDesc();}
+    public List<Movies> findTopByOrderByScoreAsc(){return moviesRepository.findByOrderByScoreAsc();}
    // public List<Movies> findMoviesByReleaseDate(Date releaseDate){return moviesRepository.findMoviesByReleaseDate(releaseDate);}
     public Movies findMoviesByMovieName(String movieName){return moviesRepository.findMoviesByMovieName(movieName);}
     public Optional<Movies> findMoviesById(Integer id_movie) {

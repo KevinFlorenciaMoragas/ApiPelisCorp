@@ -9,11 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface MoviesRepository extends JpaRepository<Movies,Integer> {
-    @Query("select m from Movies m ORDER BY m.score DESC")
-    List<Movies> findTopByOrderByScoreDesc();
-    @Query("select m from Movies m ORDER BY m.score ASC")
-    List<Movies> findTopByOrderByScoreAsc();
+
+    List<Movies> findByOrderByScoreDesc();
+    List<Movies> findByOrderByScoreAsc();
    /* @Query("select m from Movies m Where m.releaseDate = ?1")
+
     List<Movies> findMoviesByReleaseDate(Date releaseDate);*/
     @Query("select m.duration, m.movieName from Movies m Where m.movieName = ?1")
     Movies findMoviesByMovieName(String movieName);
