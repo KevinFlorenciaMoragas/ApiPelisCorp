@@ -17,12 +17,13 @@ public class MoviesService {
     public List<Movies> listMovies(){return moviesRepository.findAll();}
     public void saveMovie(Movies movies){moviesRepository.save(movies);}
     public Movies findMovieById(Integer id){return moviesRepository.findById(id).get();}
+    public List<Movies> findMoviesByGenreId(Integer id){return moviesRepository.findMoviesByGenreId(id);}
     public Movies findMovieAllDataById(Integer id){return moviesRepository.findMoviesAllDataById(id);}
     public void deleteMovie(Integer id){moviesRepository.deleteById(id);}
-    public List<Movies> findTopByOrderByScoreDesc(){return moviesRepository.findByOrderByScoreDesc();}
-    public List<Movies> findTopByOrderByScoreAsc(){return moviesRepository.findByOrderByScoreAsc();}
+    public List<Movies> findTopByOrderByScoreDesc(){return moviesRepository.findAllByOrderByScoreDesc();}
+    public List<Movies> findTopByOrderByScoreAsc(){return moviesRepository.findAllByOrderByScoreAsc();}
    // public List<Movies> findMoviesByReleaseDate(Date releaseDate){return moviesRepository.findMoviesByReleaseDate(releaseDate);}
-    public Movies findMoviesByMovieName(String movieName){return moviesRepository.findMoviesByMovieName(movieName);}
+    public List<Movies> findMoviesByMovieName(String movieName){return moviesRepository.findByMovieNameContains(movieName);}
     public Optional<Movies> findMoviesById(Integer id_movie) {
         return moviesRepository.findById(id_movie);
     }

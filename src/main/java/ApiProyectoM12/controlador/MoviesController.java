@@ -25,19 +25,19 @@ public class MoviesController {
     public List<Movies> listFavorite() {
         return moviesService.listMovies();
     }
-    /*
+
 
     @GetMapping("/movies/{id}")
-    public Movies getMovieById(@PathVariable Integer id) {
+    public ResponseEntity<Movies> getMovieById(@PathVariable Integer id) {
         try {
-            Movies movie = moviesService.findMovieAllDataById(id);
-            return movie;
+            Movies movie = moviesService.findMovieById(id);
+            return ResponseEntity.ok(movie);
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.notFound().build();
         }
     }
 
-     */
+
     @GetMapping("/movies/topDesc")
     public List<Movies> getTopMovieDesc() {
         List<Movies> movies = moviesService.findTopByOrderByScoreDesc();
@@ -51,15 +51,21 @@ public class MoviesController {
         List<Movies> movies = moviesService.findTopByOrderByScoreAsc();
         return movies;
     }
-    @GetMapping("/movies?name={movieName}")
-    public Movies getMovieByMovieName(@RequestBody Movies movie) {
-        System.out.println(movie.getMovieName());
-        movie = moviesService.findMoviesByMovieName(movie.getMovieName());
-        return movie;
+   /* @GetMapping("/movies/{releaseDate}")
+    public List<Movies> getMovieByReleaseDate(@PathVariable Date releaseDate) {
+        return moviesService.findMoviesByReleaseDate(releaseDate);
+        //return ResponseEntity.ok(movie);
+    }*/
+    @GetMapping("/moviesByMovieName/{movieName}")
+    public List<Movies> getMovieByMovieName(@PathVariable String movieName) {
+        System.out.println(movieName);
+        return moviesService.findMoviesByMovieName(movieName);
+
+        //return ResponseEntity.ok(movie);
     }
 
     @PostMapping("/movies")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Movies> newMovies(@RequestBody Movies movies) {
         try {
             System.out.println(movies);
@@ -92,6 +98,7 @@ public class MoviesController {
     public void deleteMovies(@PathVariable Integer id) {
         moviesService.deleteMovie(id);
     }
+    /*
     @GetMapping("/movies/{id_movie}")
     public ResponseEntity<AllMovie> getRolesByUserId(@PathVariable Integer id_movie){
         Optional<Movies> optionalMovie = moviesService.findMoviesById(id_movie);
@@ -102,10 +109,14 @@ public class MoviesController {
         } else {
             throw new EntityNotFoundException("Movie with ID " + id_movie + " not found");
         }
-    }
-    @GetMapping("/movies/genre/{genre}")
-    public List<Movies> getMovieByGenre(@PathVariable String genre) {
-        return moviesService.findMoviesByGenre(genre);
-        //return ResponseEntity.ok(movie);
+    }*/
+    @GetMapping("/movies/genre/{id}")
+    public ResponseEntity<List<Movies>> getMovieByGenre(@PathVariable Integer id) {
+        try{
+            List<Movies> movie = moviesService.findMoviesByGenreId(id);
+            return ResponseEntity.ok(movie);
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }
