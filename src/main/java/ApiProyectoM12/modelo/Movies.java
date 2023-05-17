@@ -24,7 +24,7 @@ public class Movies {
     @Column(name = "movieName", length = 100)
     private String movieName;
     @Column(name = "release_date")
-    private Date releaseDate;
+    private Integer releaseDate;
     @Column(name = "plot", length = 8000)
     private String plot;
     @Column(name = "duration")
