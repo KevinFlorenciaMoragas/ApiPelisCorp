@@ -25,6 +25,18 @@ public class MoviesController {
     public List<Movies> listFavorite() {
         return moviesService.listMovies();
     }
+    @GetMapping("/moviesByDirector/{id}")
+    public List<Movies> getMovieByDirector(@PathVariable Integer id) {
+        return moviesService.findMoviesByDirector(id);
+    }
+    @GetMapping("/moviesByActor/{id}")
+    public List<Movies> getMovieByActor(@PathVariable Integer id) {
+        return moviesService.findMoviesByActor(id);
+    }
+    @GetMapping("/moviesByScreenwritter/{id}")
+    public List<Movies> getMovieByScreenwritter(@PathVariable Integer id) {
+        return moviesService.findMoviesScreenwritter(id);
+    }
 
 
     @GetMapping("/movies/{id}")

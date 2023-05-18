@@ -28,4 +28,7 @@ public class MoviesService {
         return moviesRepository.findById(id_movie);
     }
     public List<Movies> findMoviesByGenre(String genre){return moviesRepository.findMoviesByGenre(genre);}
+    public List<Movies> findMoviesByDirector(Integer id){return moviesRepository.findMoviesByDirectorIdOrderByScoreDesc(id);}
+    public List<Movies> findMoviesByActor(Integer id){return moviesRepository.findMoviesByActorsIdOrderByScoreDesc(id);}
+    public List<Movies> findMoviesScreenwritter(Integer id){return moviesRepository.findMoviesByScreenwritterIdOrderByScoreDesc(id);}
 }
