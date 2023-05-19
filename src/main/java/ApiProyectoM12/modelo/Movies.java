@@ -86,5 +86,5 @@ public class Movies {
     @JoinTable(name = "moviesReviews",
             joinColumns = { @JoinColumn(name = "id_movies") },
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
-    private List<Reviews> reviews;
+    private List<Reviews> movieReviews;
 }

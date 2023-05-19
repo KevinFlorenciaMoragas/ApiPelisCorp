@@ -23,9 +23,9 @@ public class Reviews {
     @Column(name = "average_rating")
     private double averageRating;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
     @JoinTable(name = "moviesUser",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
-    private List<User> user;
+    private List<User> userReviews;
+
 }

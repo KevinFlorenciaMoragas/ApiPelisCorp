@@ -35,11 +35,13 @@ public class ReviewsController {
         try {
             System.out.println(reviews);
             reviewsService.saveReview(reviews);
+
             return null;
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PutMapping("/reviews/{id}")
     public ResponseEntity<?> editReviews(@RequestBody Reviews reviews, @PathVariable Integer id) {

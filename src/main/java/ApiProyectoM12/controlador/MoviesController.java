@@ -23,6 +23,7 @@ public class MoviesController {
 
     @GetMapping("/allMovies")
     public List<Movies> listFavorite() {
+
         return moviesService.listMovies();
     }
     @GetMapping("/moviesByDirector/{id}")
