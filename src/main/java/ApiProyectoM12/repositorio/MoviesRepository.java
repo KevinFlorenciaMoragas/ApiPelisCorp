@@ -14,6 +14,7 @@ public interface MoviesRepository extends JpaRepository<Movies,Integer> {
     List<Movies> findMoviesByGenreId(Integer id);
     List<Movies> findMoviesByDirectorIdOrderByScoreDesc(Integer id);
     List<Movies> findMoviesByActorsIdOrderByScoreDesc(Integer id);
+
     List<Movies> findMoviesByScreenwritterIdOrderByScoreDesc(Integer id);
    /* @Query("select m from Movies m Where m.releaseDate = ?1")
 

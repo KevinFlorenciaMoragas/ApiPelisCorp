@@ -21,4 +21,10 @@ public class Screenwritter {
     private String lastName;
     @Column(name = "photo")
     private String photo;
+    @Column(name = "biography", length = 8000)
+    private String biography;
+    @Column(name = "birthPlace", length = 50)
+    private String birthPlace;
+    @Column(name = "birthDate")
+    private Integer birthDate;
 }

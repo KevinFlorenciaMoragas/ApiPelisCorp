@@ -24,7 +24,7 @@ public class Reviews {
     private String text;
     @Column(name = "average_rating")
     private double averageRating;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "moviesUser",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })

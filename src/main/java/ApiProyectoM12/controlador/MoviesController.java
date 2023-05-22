@@ -1,6 +1,7 @@
 package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.Movies;
+import ApiProyectoM12.modelo.Reviews;
 import ApiProyectoM12.servicio.MoviesService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
@@ -86,6 +87,15 @@ public class MoviesController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/movie/review/{id}")
+    public void addReview(@PathVariable Integer id, @RequestBody Reviews review) {
+        Movies movie = moviesService.findMovieById(id);
+        movie.getMovieReviews().add(review);
+        moviesService.saveMovie(movie);
+
+
     }
 
     @PutMapping("/movies/{id}")
