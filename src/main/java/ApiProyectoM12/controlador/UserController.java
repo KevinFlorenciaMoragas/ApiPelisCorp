@@ -36,6 +36,15 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/userByUsername/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        try {
+            User user = userService.findUserByUsername(username).get();
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("/user")
    // @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -55,7 +64,7 @@ public class UserController {
         try {
             System.out.println(user);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-          //  user.setRole(ROLE_ADMIN);
+            user.setRole(ADMIN);
             userService.saveUser(user);
             return null;
         } catch (Exception e) {

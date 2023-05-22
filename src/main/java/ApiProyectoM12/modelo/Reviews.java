@@ -1,11 +1,13 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +28,10 @@ public class Reviews {
     @JoinTable(name = "moviesUser",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
-    private List<User> userReviews;
+    private List<User> userReviews = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "movieReviews")
+    @JsonBackReference
+    private List<Movies> movieReviews = new ArrayList<>();
 
 }

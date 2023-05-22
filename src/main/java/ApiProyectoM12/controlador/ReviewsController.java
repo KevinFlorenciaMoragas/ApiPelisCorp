@@ -34,6 +34,8 @@ public class ReviewsController {
     public ResponseEntity<Reviews> newReviews(@RequestBody Reviews reviews) {
         try {
             System.out.println(reviews);
+            //reviews.addUserReviews(reviews.getUserReviews());
+            //reviews.addMovieReviews(reviews.getMovieReviews());
             reviewsService.saveReview(reviews);
 
             return null;

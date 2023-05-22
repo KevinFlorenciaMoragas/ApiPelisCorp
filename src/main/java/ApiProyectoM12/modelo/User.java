@@ -1,5 +1,6 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,8 @@ public class User {
     private String avatar;
    @Enumerated(EnumType.STRING)
     private Role role;
-
+    @ManyToMany
+    @JsonIgnore
+    private List<Reviews> userReviews;
 
 }

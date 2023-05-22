@@ -1,6 +1,5 @@
 package ApiProyectoM12.controlador;
 
-import ApiProyectoM12.modelo.AllMovie;
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.servicio.MoviesService;
 import jakarta.persistence.EntityNotFoundException;
