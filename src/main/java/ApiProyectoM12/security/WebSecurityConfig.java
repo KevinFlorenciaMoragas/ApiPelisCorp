@@ -41,32 +41,13 @@ public class WebSecurityConfig  {
 
         filter.setAuthenticationManager(authenticationManager);
         filter.setFilterProcessesUrl("/login");
-    /*return http
-                .cors().and()
-                .csrf().disable()
-                .authorizeRequests()
-                //.requestMatchers(HttpMethod.POST, "/login2").permitAll()
-                .requestMatchers(HttpMethod.GET, "/user").authenticated()
-            //.hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/user/**")
-                .permitAll()
-                .requestMatchers(HttpMethod.POST, "/admin/**")
-                .permitAll()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(filter)
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
 
-     */
         return http
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.GET).permitAll()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                //.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
                 //.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST).permitAll()

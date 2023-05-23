@@ -2,6 +2,7 @@ package ApiProyectoM12.servicio;
 
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.repositorio.MoviesRepository;
+import ApiProyectoM12.repositorio.ReviewsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class MoviesService {
     @Autowired
     private MoviesRepository moviesRepository;
+    @Autowired
+    private ReviewsRepository reviewsRepository;
     public List<Movies> listMovies(){return moviesRepository.findAll();}
     public void saveMovie(Movies movies){moviesRepository.save(movies);}
     public Movies findMovieById(Integer id){return moviesRepository.findById(id).get();}

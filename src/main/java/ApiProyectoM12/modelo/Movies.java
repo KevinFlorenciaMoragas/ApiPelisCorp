@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -95,6 +97,6 @@ public class Movies {
     @JoinTable(name = "moviesReviews",
             joinColumns = { @JoinColumn(name = "id_movies") },
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
-    private List<Reviews> movieReviews;
+    private Set<Reviews> movieReviews = new HashSet<>();
 
 }

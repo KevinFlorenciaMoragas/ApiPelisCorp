@@ -2,7 +2,10 @@ package ApiProyectoM12.controlador;
 
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.modelo.Reviews;
+import ApiProyectoM12.modelo.User;
 import ApiProyectoM12.servicio.MoviesService;
+import ApiProyectoM12.servicio.ReviewsService;
+import ApiProyectoM12.servicio.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,30 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MoviesController {
     private final MoviesService moviesService;
+    private final ReviewsService reviewsService;
+    private final UserService userService;
+
+    @PostMapping("/movies/{movieId}/reviews/{userId}")
+    public ResponseEntity<String> createReview(@PathVariable Integer movieId, @PathVariable Integer userId, @RequestBody Reviews review) {
+        try {
+            Optional<Movies> optionalMovie = moviesService.findMoviesById(movieId);
+            User user = userService.findUserById(userId);
+            if (optionalMovie.isPresent()) {
+                Movies movie = optionalMovie.get();
+                review.getMovieReviews().add(movie);
+                review.getUserReviews().add(user);
+                movie.getMovieReviews().add(review);
+                user.getUserReviews().add(review);
+                moviesService.saveMovie(movie);
+                reviewsService.saveReview(review);
+                return ResponseEntity.ok("Reseña agregada a la película con ID: " + movie.getId());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping("/allMovies")
     public List<Movies> listFavorite() {
