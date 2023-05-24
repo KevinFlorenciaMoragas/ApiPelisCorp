@@ -4,8 +4,6 @@ import ApiProyectoM12.modelo.Actors;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
-
 import java.util.List;
 
 public interface ActorsRepository extends JpaRepository<Actors,Integer> {

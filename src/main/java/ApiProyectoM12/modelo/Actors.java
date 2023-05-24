@@ -22,8 +22,11 @@ public class Actors {
     private String lastName;
     @Column(name = "photo")
     private String photo;
-    @OneToMany(mappedBy = "actors")
-    Set<MovieActor> movieActors;
-    @OneToMany(mappedBy = "actors")
-    Set<ActorAward>actorAwards;
+    @Column(name = "biography", length = 8000)
+    private String biography;
+    @Column(name = "birthPlace", length = 50)
+    private String birthPlace;
+    @Column(name = "birthDate")
+    private Integer birthDate;
+
 }

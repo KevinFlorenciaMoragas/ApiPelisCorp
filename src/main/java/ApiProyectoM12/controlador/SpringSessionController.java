@@ -19,16 +19,17 @@ import java.util.List;
 
 public class SpringSessionController {
     private final UserRepository userRepository;
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request, Model model) {
         System.out.println("Entramos en login");
+
         try {
             User userExist = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             if (userExist!= null) {
                 System.out.println("Usuario correcto");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", user.getUsername());
-                session.setAttribute("rol", user.getUserRol());
+              //  session.setAttribute("rol", user.getRole());
                 System.out.println(session.getAttribute("username"));
                 return ResponseEntity.ok(userExist);
             } else {
@@ -41,17 +42,12 @@ public class SpringSessionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor");
         }
     }
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        System.out.println("Entramos en logout");
         HttpSession session = request.getSession();
         session.invalidate();
-        return "redirect:/";
+        return  ResponseEntity.ok("Sesión cerrada");
     }
-
-    @GetMapping("/login")
-    public String login(@RequestParam (required = false) String error, Model model) {
-        if(error!= null)
-            model.addAttribute("error", error);
-        return "login";
-    }
+    
 }

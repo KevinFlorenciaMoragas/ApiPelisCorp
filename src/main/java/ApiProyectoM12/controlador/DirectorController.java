@@ -14,7 +14,7 @@ import java.util.List;
 public class DirectorController {
     private final DirectorService directorService;
 
-    @GetMapping("/director")
+    @GetMapping("/allDirectors")
     public List<Director> listDirector() {
         return directorService.listDirector();
     }
@@ -46,7 +46,6 @@ public class DirectorController {
             Director directorExist = directorService.findDirectorById(id);
             directorExist.setName(director.getName());
             directorExist.setLastName(director.getLastName());
-            directorExist.setMovieDirectors(director.getMovieDirectors());
             directorService.saveDirector(directorExist);
             return new ResponseEntity<Director>(directorExist, HttpStatus.OK);
 

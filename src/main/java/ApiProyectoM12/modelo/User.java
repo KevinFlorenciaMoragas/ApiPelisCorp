@@ -1,10 +1,15 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
@@ -13,7 +18,6 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
-
     @Column(name = "name", nullable = false, length = 20)
     private String name;
     @Column(name = "last_name", nullable = false, length = 20)
@@ -24,15 +28,13 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 120)
     private String email;
-    @Column(name = "photo")
-    private String photo;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userRol_id")
-   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private UserRol userRol;
-    @OneToMany(mappedBy = "user")
-    Set<Favorite> favorites;
-    @OneToMany(mappedBy = "user")
-    Set<UserReview> userReviews;
+    @Column(name = "avatar", length = 100)
+    private String avatar;
+   @Enumerated(EnumType.STRING)
+    private Role role;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Reviews> reviews;
+
 
 }

@@ -46,8 +46,6 @@ public class AwardsController {
         try {
             Awards awardsExist = awardsService.findAwardById(id);
             awardsExist.setName(awards.getName());
-            awardsExist.setActorAwards(awards.getActorAwards());
-            awardsExist.setMovieAwards(awards.getMovieAwards());
             awardsExist.setFestival(awards.getFestival());
             awardsService.saveAwards(awardsExist);
             return new ResponseEntity<Awards>(awardsExist, HttpStatus.OK);

@@ -19,6 +19,12 @@ public class Screenwritter {
     private String name;
     @Column(name = "lastName", length = 50)
     private String lastName;
-    @OneToMany(mappedBy = "screenwritter")
-    Set<MovieScreenwritter> movieScreenwritters;
+    @Column(name = "photo")
+    private String photo;
+    @Column(name = "biography", length = 8000)
+    private String biography;
+    @Column(name = "birthPlace", length = 50)
+    private String birthPlace;
+    @Column(name = "birthDate")
+    private Integer birthDate;
 }

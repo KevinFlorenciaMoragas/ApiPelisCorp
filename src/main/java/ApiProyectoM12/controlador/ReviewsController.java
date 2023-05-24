@@ -34,20 +34,23 @@ public class ReviewsController {
     public ResponseEntity<Reviews> newReviews(@RequestBody Reviews reviews) {
         try {
             System.out.println(reviews);
+            //reviews.addUserReviews(reviews.getUserReviews());
+            //reviews.addMovieReviews(reviews.getMovieReviews());
             reviewsService.saveReview(reviews);
+
             return null;
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+
     @PutMapping("/reviews/{id}")
     public ResponseEntity<?> editReviews(@RequestBody Reviews reviews, @PathVariable Integer id) {
         try {
             Reviews reviewsExist = reviewsService.findReviewById(id);
             reviewsExist.setText(reviews.getText());
-            reviewsExist.setUserReviews(reviews.getUserReviews());
-            reviewsExist.setMovieReviews(reviews.getMovieReviews());
+
             reviewsExist.setAverageRating(reviews.getAverageRating());
             reviewsService.saveReview(reviewsExist);
             return new ResponseEntity<Reviews>(reviewsExist, HttpStatus.OK);
