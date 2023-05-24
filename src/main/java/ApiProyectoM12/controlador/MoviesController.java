@@ -103,8 +103,6 @@ public class MoviesController {
     public List<Movies> getMovieByMovieName(@PathVariable String movieName) {
         System.out.println(movieName);
         return moviesService.findMoviesByMovieName(movieName);
-
-        //return ResponseEntity.ok(movie);
     }
 
     @PostMapping("/movies")

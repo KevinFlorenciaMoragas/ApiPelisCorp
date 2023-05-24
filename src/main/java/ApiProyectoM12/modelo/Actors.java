@@ -28,4 +28,5 @@ public class Actors {
     private String birthPlace;
     @Column(name = "birthDate")
     private Integer birthDate;
+
 }

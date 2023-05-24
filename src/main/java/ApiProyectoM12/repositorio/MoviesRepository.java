@@ -26,5 +26,6 @@ public interface MoviesRepository extends JpaRepository<Movies,Integer> {
     @Query("select m from Movies m INNER JOIN Genre g ON g.id = m.id WHERE g.genre = ?1")
     List<Movies>findMoviesByGenre(String genre);
 */
+
 }
 

@@ -28,4 +28,5 @@ public class Director {
     private String birthPlace;
     @Column(name = "birthDate")
     private Integer birthDate;
+
 }

@@ -18,6 +18,10 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(name = "name", nullable = false, length = 20)
+    private String name;
+    @Column(name = "last_name", nullable = false, length = 20)
+    private String last_name;
     @Column(name = "username", nullable = false, length = 20)
     private String username;
     @Column(name = "password", nullable = false, length = 8000)
@@ -28,9 +32,9 @@ public class User {
     private String avatar;
    @Enumerated(EnumType.STRING)
     private Role role;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Reviews> reviews;
+
 
 }
