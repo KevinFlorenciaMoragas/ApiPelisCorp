@@ -16,4 +16,5 @@ public class ReviewsService {
     public void saveReview(Reviews reviews){reviewsRepository.save(reviews);}
     public Reviews findReviewById(Integer id){return reviewsRepository.findById(id).get();}
     public void deleteReview(Integer id){reviewsRepository.deleteById(id);}
+    public List<Reviews> findAllByMoviesId(Integer id){return reviewsRepository.findAllByMoviesId(id);}
 }

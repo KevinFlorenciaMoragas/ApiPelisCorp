@@ -18,5 +18,6 @@ public class UserService {
     public void saveUser(User user){userRepository.save(user);}
     public User findUserById(Integer id){return userRepository.findById(id).get();}
     public void deleteUser(Integer id){userRepository.deleteById(id);}
+    //public void findUserByUsernameAndEmail(Integer id){userRepository.findByUsernameAndEmail(id);}
     public User findByUsernameAndPassword(String username, String password){return userRepository.findByUsernameAndPassword(username,password);}
 }

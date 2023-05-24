@@ -9,11 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -54,7 +50,6 @@ public class Movies {
     private List<Actors> actors;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-
     @JsonManagedReference
     @JoinTable(name = "moviesGenres",
             joinColumns = { @JoinColumn(name = "id_movies") },
@@ -99,8 +94,8 @@ public class Movies {
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
     private Set<Reviews> movieReviews = new HashSet<>();
     */
-    @OneToMany(mappedBy = "movies")
+    @OneToMany(mappedBy = "movies", cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "moviesReviews")
     @JsonIgnore
-    private Set<Reviews> reviews = new HashSet<>();
+    private List<Reviews> reviews = new ArrayList<>();
 }

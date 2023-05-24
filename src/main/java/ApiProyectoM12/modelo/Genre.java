@@ -1,10 +1,12 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,6 +19,9 @@ public class Genre {
     private Integer id;
     @Column(name="genre", length = 100)
     private String genre;
+    @ManyToMany(mappedBy = "genre")
+    @JsonBackReference
+    private List<Movies> movies;
 
 
 }

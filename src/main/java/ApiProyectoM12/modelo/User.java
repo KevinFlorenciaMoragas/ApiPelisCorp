@@ -16,20 +16,20 @@ import java.util.Set;
 @Table(name="user")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "username", nullable = false, length = 20)
+    @Column(name = "username", nullable = false, length = 20,unique = true)
     private String username;
     @Column(name = "password", nullable = false, length = 8000)
     private String password;
-    @Column(name = "email", nullable = false, length = 120)
+    @Column(name = "email", nullable = false, length = 120,unique = true)
     private String email;
     @Column(name = "avatar", length = 100)
     private String avatar;
    @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reviews> reviews;
 

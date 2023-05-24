@@ -20,6 +20,15 @@ public class ReviewsController {
         return reviewsService.listReview();
     }
 
+    @GetMapping("/reviews/movies/{id}")
+    public ResponseEntity<List<Reviews>> getReviewsByMovieId(@PathVariable Integer id) {
+        try {
+            List<Reviews> reviews = reviewsService.findAllByMoviesId(id);
+            return ResponseEntity.ok(reviews);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @GetMapping("/reviews/{id}")
     public ResponseEntity<Reviews> getReviewsById(@PathVariable Integer id) {
         try {

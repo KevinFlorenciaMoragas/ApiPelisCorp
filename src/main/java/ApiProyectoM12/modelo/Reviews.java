@@ -26,11 +26,11 @@ public class Reviews {
     @Column(name = "average_rating")
     private double averageRating;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User reviewUser;
 
-    @ManyToOne()
+    @ManyToOne( cascade = CascadeType.PERSIST)
     @JoinColumn(name = "movie_id")
     private Movies movies;
 

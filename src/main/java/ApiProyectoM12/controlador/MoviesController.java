@@ -1,5 +1,6 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.DTO.ReviewDTO;
 import ApiProyectoM12.modelo.Movies;
 import ApiProyectoM12.modelo.Reviews;
 import ApiProyectoM12.modelo.User;
@@ -10,14 +11,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -26,8 +25,8 @@ public class MoviesController {
     private final MoviesService moviesService;
     private final ReviewsService reviewsService;
     private final UserService userService;
-
-    @PostMapping(value = "/movies/{movieId}/reviews/{userId}", consumes = "application/json;charset=UTF-8")
+/*
+    @PostMapping(value = "/movies/{movieId}/reviews/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createReview(@PathVariable Integer movieId, @PathVariable Integer userId, @RequestBody Reviews review) {
         System.out.printf("CREATE REVIEW");
         try {
@@ -50,7 +49,30 @@ public class MoviesController {
            // return ResponseEntity.notFound().build();
         }
     }
+*/
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(value = "/movies/reviews/", consumes = MediaType.APPLICATION_JSON_VALUE,produces =MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<?> createReview(@RequestBody ReviewDTO review) {
+        try {
+            System.out.println("CREATE REVIEW");
+            List <Reviews> reviews = new ArrayList<>();
+            Reviews newReview = new Reviews();
+            newReview.setText(review.getText());
+            newReview.setAverageRating(review.getAverageRating());
+            User user = userService.findUserById(review.getId_user());
+            Movies movie = moviesService.findMovieById(review.getId_movie());
+            newReview.setReviewUser(user);
+            newReview.setMovies(movie);
+            reviews.add(newReview);
+            user.setReviews(reviews);
+            movie.setReviews(reviews);
+            userService.saveUser(user);
+            return ResponseEntity.ok().build() ;
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
 
+    }
     @GetMapping("/allMovies")
     public List<Movies> listFavorite() {
 
@@ -119,14 +141,14 @@ public class MoviesController {
         }
     }
 
-    @PostMapping("/movie/review/{id}")
+   /* @PostMapping("/movie/review/{id}")
     public void addReview(@PathVariable Integer id, @RequestBody Reviews review) {
         Movies movie = moviesService.findMovieById(id);
         movie.getReviews().add(review);
         moviesService.saveMovie(movie);
 
 
-    }
+    }*/
 
     @PutMapping("/movies/{id}")
     public ResponseEntity<?> editMovies(@RequestBody Movies movies, @PathVariable Integer id) {
