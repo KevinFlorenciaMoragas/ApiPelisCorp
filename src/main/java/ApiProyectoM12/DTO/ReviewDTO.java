@@ -12,6 +12,6 @@ public class ReviewDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private String text;
     private double averageRating;
-    private Integer id_user;
-    private Integer id_movie;
+    private Integer id_user = 0;
+    private Integer id_movie = 0;
 }
