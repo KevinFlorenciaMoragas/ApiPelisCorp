@@ -1,6 +1,7 @@
 package ApiProyectoM12.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -36,15 +37,16 @@ public class Movies {
     private Long income;
     @Column(name = "score")
     private Double score;
+    @Column(name = "banner")
+    private String banner;
     @JsonManagedReference
     @OneToMany(mappedBy = "id",cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Poster> poster;
     @Column(name = "trailer", length = 200)
     private String trailer;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     @JsonManagedReference
     @JoinTable(name = "moviesActors",
             joinColumns = { @JoinColumn(name = "id_movies") },
@@ -52,7 +54,7 @@ public class Movies {
     private List<Actors> actors;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     @JsonManagedReference
     @JoinTable(name = "moviesGenres",
             joinColumns = { @JoinColumn(name = "id_movies") },
@@ -60,7 +62,7 @@ public class Movies {
     private List<Genre> genre;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     @JsonManagedReference
     @JoinTable(name = "moviesDirectors",
             joinColumns = { @JoinColumn(name = "id_movies") },
@@ -68,7 +70,7 @@ public class Movies {
     private List<Director> director;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     @JsonManagedReference
     @JoinTable(name = "moviesScreenwritters",
             joinColumns = { @JoinColumn(name = "id_movies") },
@@ -76,7 +78,7 @@ public class Movies {
     private List<Screenwritter> screenwritter;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     @JsonManagedReference
     @JoinTable(name = "moviesFavorites",
             joinColumns = { @JoinColumn(name = "id_movies") },
@@ -85,18 +87,20 @@ public class Movies {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JsonManagedReference
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JoinTable(name = "moviesAwards",
             joinColumns = { @JoinColumn(name = "id_movies") },
             inverseJoinColumns = { @JoinColumn(name = "id_award", nullable = false) })
     private List<Awards> awards;
-
+    /*
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "moviesReviews")
     @JoinTable(name = "moviesReviews",
             joinColumns = { @JoinColumn(name = "id_movies") },
             inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
     private Set<Reviews> movieReviews = new HashSet<>();
-
+    */
+    @OneToMany(mappedBy = "movies")
+    @JsonBackReference(value = "moviesReviews")
+    @JsonIgnore
+    private Set<Reviews> reviews = new HashSet<>();
 }

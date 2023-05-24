@@ -25,14 +25,13 @@ public class Reviews {
     private String text;
     @Column(name = "average_rating")
     private double averageRating;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "moviesUser",
-            joinColumns = { @JoinColumn(name = "id_user") },
-            inverseJoinColumns = { @JoinColumn(name = "id_review", nullable = false) })
-    private List<User> userReviews = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "movieReviews")
-    @JsonBackReference
-    private Set<Movies> movieReviews = new HashSet<>();
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User reviewUser;
+
+    @ManyToOne()
+    @JoinColumn(name = "movie_id")
+    private Movies movies;
 
 }

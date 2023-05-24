@@ -1,5 +1,6 @@
 package ApiProyectoM12.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -27,8 +28,9 @@ public class User {
     private String avatar;
    @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Reviews> userReviews;
+    private List<Reviews> reviews;
 
 }

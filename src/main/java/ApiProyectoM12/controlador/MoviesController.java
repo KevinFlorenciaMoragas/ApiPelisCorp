@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -26,25 +27,27 @@ public class MoviesController {
     private final ReviewsService reviewsService;
     private final UserService userService;
 
-    @PostMapping("/movies/{movieId}/reviews/{userId}")
-    public ResponseEntity<String> createReview(@PathVariable Integer movieId, @PathVariable Integer userId, @RequestBody Reviews review) {
+    @PostMapping(value = "/movies/{movieId}/reviews/{userId}", consumes = "application/json;charset=UTF-8")
+    public void createReview(@PathVariable Integer movieId, @PathVariable Integer userId, @RequestBody Reviews review) {
+        System.out.printf("CREATE REVIEW");
         try {
             Optional<Movies> optionalMovie = moviesService.findMoviesById(movieId);
+            System.out.println("Movies " + optionalMovie.get().getMovieName());
             User user = userService.findUserById(userId);
-            if (optionalMovie.isPresent()) {
-                Movies movie = optionalMovie.get();
-                review.getMovieReviews().add(movie);
-                review.getUserReviews().add(user);
-                movie.getMovieReviews().add(review);
-                user.getUserReviews().add(review);
-                moviesService.saveMovie(movie);
-                reviewsService.saveReview(review);
-                return ResponseEntity.ok("Reseña agregada a la película con ID: " + movie.getId());
-            } else {
-                return ResponseEntity.notFound().build();
-            }
+            System.out.println("User " + user.getUsername());
+            Movies movie = optionalMovie.get();
+            System.out.println("Movie " + movie.getMovieName());
+            review.setMovies(movie);
+            System.out.println("Review " + review.getText());
+            review.setReviewUser(user);
+            movie.getReviews().add(review);
+            user.getReviews().add(review);
+            moviesService.saveMovie(movie);
+            reviewsService.saveReview(review);
+            userService.saveUser(user);
+           // return ResponseEntity.ok(movie);
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
+           // return ResponseEntity.notFound().build();
         }
     }
 
@@ -119,7 +122,7 @@ public class MoviesController {
     @PostMapping("/movie/review/{id}")
     public void addReview(@PathVariable Integer id, @RequestBody Reviews review) {
         Movies movie = moviesService.findMovieById(id);
-        movie.getMovieReviews().add(review);
+        movie.getReviews().add(review);
         moviesService.saveMovie(movie);
 
 
