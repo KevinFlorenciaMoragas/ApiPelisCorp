@@ -92,4 +92,16 @@ public class UserController {
     public void deleteUser(@PathVariable Integer id) {
         userService.deleteUser(id);
     }
+    @PutMapping("/password/{username}")
+    public ResponseEntity<?> editPassword(@RequestBody User user, @PathVariable String username) {
+        try {
+            User userExist = userService.findUserByUsername(username).get();
+            userExist.setPassword(passwordEncoder.encode(user.getPassword()));
+            userService.saveUser(userExist);
+            return new ResponseEntity<User>(userExist, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
