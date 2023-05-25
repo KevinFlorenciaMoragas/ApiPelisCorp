@@ -1,12 +1,9 @@
 package ApiProyectoM12.controlador;
 
+import ApiProyectoM12.DTO.MovieDTO;
 import ApiProyectoM12.DTO.ReviewDTO;
-import ApiProyectoM12.modelo.Movies;
-import ApiProyectoM12.modelo.Reviews;
-import ApiProyectoM12.modelo.User;
-import ApiProyectoM12.servicio.MoviesService;
-import ApiProyectoM12.servicio.ReviewsService;
-import ApiProyectoM12.servicio.UserService;
+import ApiProyectoM12.modelo.*;
+import ApiProyectoM12.servicio.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +22,12 @@ public class MoviesController {
     private final MoviesService moviesService;
     private final ReviewsService reviewsService;
     private final UserService userService;
+    private final ActorsService actorsService;
+    private final DirectorService directorService;
+    private final ScreenwritterService screenwriterService;
+    private final GenreService genreService;
+    private final PosterService posterService;
+
 /*
     @PostMapping(value = "/movies/{movieId}/reviews/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createReview(@PathVariable Integer movieId, @PathVariable Integer userId, @RequestBody Reviews review) {
@@ -67,6 +70,80 @@ public class MoviesController {
             user.setReviews(reviews);
             movie.setReviews(reviews);
             userService.saveUser(user);
+            return ResponseEntity.ok().build() ;
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(value ="/allDataMovies", consumes = MediaType.APPLICATION_JSON_VALUE,produces =MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<?> createMovie(@RequestBody MovieDTO movieDTO) {
+        try {
+            System.out.println("CREATE MOVIE");
+            Movies movie = new Movies();
+            movie.setMovieName(movieDTO.getMovieName());
+            movie.setReleaseDate(movieDTO.getReleaseDate());
+            movie.setDuration(movieDTO.getDuration());
+            movie.setPlot(movieDTO.getPlot());
+            movie.setScore(movieDTO.getScore());
+            List<Actors> actorsList = new ArrayList<>();
+            for (int i = 0; i < movieDTO.getId_actors().size(); i++) {
+                Actors actor = actorsService.findActorsById(movieDTO.getId_actors().get(i));
+                if(actor != null){
+                    actorsList.add(actor);
+                }
+            }
+            movie.setActors(actorsList);
+            List<Genre> genresList = new ArrayList<>();
+            for (int i = 0; i < movieDTO.getId_genre().size(); i++) {
+                Genre genre = genreService.findGenreById(movieDTO.getId_genre().get(i));
+                if(genre != null){
+                    genresList.add(genre);
+                }
+            }
+            movie.setGenre(genresList);
+            List<Director> directorsList = new ArrayList<>();
+            for (int i = 0; i < movieDTO.getId_director().size(); i++) {
+                Director director = directorService.findDirectorById(movieDTO.getId_director().get(i));
+                if(director != null){
+                    directorsList.add(director);
+                }
+            }
+            movie.setDirector(directorsList);
+            List<Screenwritter> screenwrittersList = new ArrayList<>();
+            for (int i = 0; i < movieDTO.getId_screenwritter().size(); i++) {
+                Screenwritter screenwritter = screenwriterService.findSreenwritterById(movieDTO.getId_screenwritter().get(i));
+                if(screenwritter != null){
+                    screenwrittersList.add(screenwritter);
+                }
+            }
+            movie.setScreenwritter(screenwrittersList);
+            List<Poster> postersList = new ArrayList<>();
+            for (int i = 0; i < movieDTO.getId_poster().size(); i++) {
+                Poster poster = posterService.findPosterById(movieDTO.getId_poster().get(i));
+                if(poster != null){
+                    postersList.add(poster);
+                }
+            }
+            movie.setPoster(postersList);
+            movie.setTrailer(movieDTO.getTrailer());
+            movie.setBanner(movieDTO.getBanner());
+            moviesService.saveMovie(movie);
+             /*   List<Poster> posters = new ArrayList<>();
+            Poster poster = new Poster();
+            for (int i = 0; i < movie.getPoster().size(); i++) {
+                poster.setUrl(movie.getPoster().get(i).getUrl());
+                posters.add(poster);
+//            }*/
+//            //poster.setUrl(movieDTO.getPoster().get(0).getUrl());
+           /* movie.setDirector(movieDTO.getDirectors());
+            movie.setTrailer(movieDTO.getTrailer());
+            movie.setBanner(movieDTO.getBanner());
+            movie.setScreenwritter(movieDTO.getScreenwritters());
+            movie.setActors(movieDTO.getActors());
+            movie.setGenre(movieDTO.getGenre());
+           */
             return ResponseEntity.ok().build() ;
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();

@@ -1,6 +1,7 @@
 package ApiProyectoM12.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.io.Serial;
@@ -12,6 +13,9 @@ public class ReviewDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private String text;
     private double averageRating;
-    private Integer id_user = 0;
+    @Column(name = "movie_id")
     private Integer id_movie = 0;
+    @Column(name = "user_id")
+    private Integer id_user = 0;
+
 }
