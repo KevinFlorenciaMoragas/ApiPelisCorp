@@ -130,20 +130,6 @@ public class MoviesController {
             movie.setTrailer(movieDTO.getTrailer());
             movie.setBanner(movieDTO.getBanner());
             moviesService.saveMovie(movie);
-             /*   List<Poster> posters = new ArrayList<>();
-            Poster poster = new Poster();
-            for (int i = 0; i < movie.getPoster().size(); i++) {
-                poster.setUrl(movie.getPoster().get(i).getUrl());
-                posters.add(poster);
-//            }*/
-//            //poster.setUrl(movieDTO.getPoster().get(0).getUrl());
-           /* movie.setDirector(movieDTO.getDirectors());
-            movie.setTrailer(movieDTO.getTrailer());
-            movie.setBanner(movieDTO.getBanner());
-            movie.setScreenwritter(movieDTO.getScreenwritters());
-            movie.setActors(movieDTO.getActors());
-            movie.setGenre(movieDTO.getGenre());
-           */
             return ResponseEntity.ok().build() ;
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();

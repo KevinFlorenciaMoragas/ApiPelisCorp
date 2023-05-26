@@ -40,9 +40,7 @@ public class Movies {
     private List<Poster> poster;
     @Column(name = "trailer", length = 200)
     private String trailer;
-
     @ManyToMany(cascade = CascadeType.MERGE)
-
     @JsonManagedReference
     @JoinTable(name = "moviesActors",
             joinColumns = { @JoinColumn(name = "id_movies") },
