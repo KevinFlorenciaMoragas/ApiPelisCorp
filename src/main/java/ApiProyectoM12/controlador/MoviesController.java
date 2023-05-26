@@ -120,14 +120,14 @@ public class MoviesController {
                 }
             }
             movie.setScreenwritter(screenwrittersList);
-            List<Poster> postersList = new ArrayList<>();
+/*            List<Poster> postersList = new ArrayList<>();
             for (int i = 0; i < movieDTO.getId_poster().size(); i++) {
                 Poster poster = posterService.findPosterById(movieDTO.getId_poster().get(i));
                 if(poster != null){
                     postersList.add(poster);
                 }
-            }
-            movie.setPoster(postersList);
+            }*/
+           // movie.setPoster(postersList);
             movie.setTrailer(movieDTO.getTrailer());
             movie.setBanner(movieDTO.getBanner());
             moviesService.saveMovie(movie);
