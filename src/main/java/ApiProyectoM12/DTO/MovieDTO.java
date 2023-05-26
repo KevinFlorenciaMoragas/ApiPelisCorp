@@ -32,6 +32,8 @@ public class MovieDTO {
     private String banner;
     @Column(name = "trailer", length = 200)
     private String trailer;
+    @Column(name ="photo")
+    private String photo;
     private List<Integer> id_poster;
     private List<Integer> id_actors;
     private List<Integer> id_genre;

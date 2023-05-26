@@ -87,6 +87,7 @@ public class MoviesController {
             movie.setDuration(movieDTO.getDuration());
             movie.setPlot(movieDTO.getPlot());
             movie.setScore(movieDTO.getScore());
+            movie.setPhoto(movieDTO.getPhoto());
             List<Actors> actorsList = new ArrayList<>();
             for (int i = 0; i < movieDTO.getId_actors().size(); i++) {
                 Actors actor = actorsService.findActorsById(movieDTO.getId_actors().get(i));

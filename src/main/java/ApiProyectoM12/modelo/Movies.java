@@ -35,6 +35,8 @@ public class Movies {
     private Double score;
     @Column(name = "banner")
     private String banner;
+    @Column(name ="photo")
+    private String photo;
     @JsonManagedReference
     @OneToMany(mappedBy = "id",cascade = CascadeType.MERGE)
     private List<Poster> poster;
